@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Detalhe do Produto</title>
+
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/produto-detalhe.css">
+<link rel="stylesheet" href="../css/produto.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+<body>
+
+<header>
+
+    <div class="topo">
+
+        <!-- LOGO + NOME -->
+        <div class="logo-container">
+            <img src="../imagens/logo.png" class="logo-img">
+            <h1 class="logo">Ateliê A.R.</h1>
+        </div>
+
+        <!-- MENU -->
+        <nav class="menu">
+            <a href="../html/index.html">Início</a>
+            <a href="../html/sobre.html">Sobre nós</a>
+            <a href="../html/Produto.html">Produtos</a>
+            <a href="../html/rastrear.html">Rastrear pedido</a>
+            <a href="#" id="btnPerfil">Perfil</a>
+            <a href="../html/contato2.html">Contato</a>
+        </nav>
+
+        <!-- CARRINHO -->
+        <div class="acoes">
+            <a href="../html/carrinho.html" class="carrinho">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="contador-carrinho" id="contadorCarrinho">
+            0
+        </span>
+            </a>
+        </div>
+
+    </div>
+
+</header>
+
+<section>
+
+    <div class="detalhe-container">
+
+       <!-- GALERIA -->
+  <div class="galeria">
+
+    <div class="imagem-principal">
+      <img id="img-produto">
+    </div>
+
+    <div class="miniaturas" id="miniaturas"></div>
+
+  </div>
+
+  <!-- INFO -->
+  <div class="info-produto">
+
+    <div class="topo-produto">
+
+  <h1 id="nome-produto"></h1>
+
+ 
+
+</div>
+
+<div class="avaliacao">
+
+  <span id="estrelas">
+
+    <i class="fa-regular fa-star"></i>
+    <i class="fa-regular fa-star"></i>
+    <i class="fa-regular fa-star"></i>
+    <i class="fa-regular fa-star"></i>
+    <i class="fa-regular fa-star"></i>
+
+  </span>
+
+  <span id="texto-avaliacao">
+    Ainda sem avaliações
+  </span>
+
+  <p class="prazo-producao">
+
+    Prazo de produção:
+    até 7 dias úteis.
+
+  </p>
+
+</div>
+
+    <p class="preco" id="preco-produto"></p>
+
+    <p class="descricao-curta">
+  Produto artesanal feito à mão com hastes de chenille.
+</p>
+
+<div class="quant">
+
+  <button
+    type="button"
+    onclick="alterarQuantidade(-1)"
+  >
+    -
+  </button>
+
+  <span id="quantidade-produto">
+    0
+  </span>
+
+  <button
+    type="button"
+    onclick="alterarQuantidade(1)"
+  >
+    +
+  </button>
+
+</div>
+
+<div class="botoes">
+
+ <button
+    class="btn-carrinho"
+    id="btnCarrinho"
+  >
+    Adicionar ao carrinho
+  </button>
+
+</div>
+  </div>
+</div>
+</section>
+
+<!-- DESCRIÇÃO -->
+<section class="descricao-box">
+
+  <h2>Descrição</h2>
+
+  <p id="descricao-produto"></p>
+
+</section>
+<!-- INFORMAÇÕES EXTRAS -->
+<section class="extras-produto">
+
+  <!-- ENVIO -->
+  <div class="extra-card">
+
+    <div class="titulo-extra">
+      <i class="fa-solid fa-truck"></i>
+      <h2>Envios do seu pedido</h2>
+    </div>
+
+    <p>
+      Seu pedido é preparado com extremo cuidado para garantir que chegue em perfeito estado.
+    </p>
+
+    <p>
+      As peças são protegidas e embaladas de forma segura durante todo o transporte.
+    </p>
+
+    <p>
+      Realizamos envios para todo o Brasil.
+    </p>
+
+  </div>
+
+  <!-- CUIDADOS -->
+  <div class="extra-card">
+
+   <div class="titulo-extra">
+    <i class="fa-solid fa-triangle-exclamation"></i>
+    <h2>Cuidados com sua peça</h2>
+</div>
+
+    <ul>
+
+      <li>
+        Utilize pano seco, espanador ou pincel macio para remover poeira.
+      </li>
+
+      <li>
+        Evite exposição direta ao sol por longos períodos.
+      </li>
+
+      <li>
+        Não utilizar água diretamente na peça.
+      </li>
+
+      <li>
+        Evite locais úmidos ou próximos de calor intenso.
+      </li>
+
+    </ul>
+
+  </div>
+
+  <!-- FAQ -->
+  <div class="extra-card">
+
+    <div class="titulo-extra">
+      <i class="fa-solid fa-circle-question"></i>
+      <h2>Perguntas frequentes</h2>
+    </div>
+
+    <div class="faq-item">
+
+      <button class="faq-pergunta">
+        Os produtos são artesanais?
+        <i class="fa-solid fa-chevron-down"></i>
+      </button>
+
+      <div class="faq-resposta">
+        Sim. Todas as peças são produzidas manualmente com muito cuidado e atenção aos detalhes.
+      </div>
+
+    </div>
+
+    <div class="faq-item">
+
+      <button class="faq-pergunta">
+        O produto será idêntico ao da foto?
+        <i class="fa-solid fa-chevron-down"></i>
+      </button>
+
+      <div class="faq-resposta">
+        Pequenas variações podem acontecer por serem peças artesanais, tornando cada item único.
+      </div>
+
+    </div>
+
+    <div class="faq-item">
+
+      <button class="faq-pergunta">
+        Vocês enviam para todo o Brasil?
+        <i class="fa-solid fa-chevron-down"></i>
+      </button>
+
+      <div class="faq-resposta">
+        Sim. Enviamos para todo o Brasil com embalagem segura.
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- COMENTÁRIOS -->
+<section class="comentarios-box">
+
+  <h2>Comentários</h2>
+
+  <div id="comentarios">
+
+    <div class="sem-avaliacoes">
+
+      <i class="fa-regular fa-comment"></i>
+
+      <h3>
+        Ainda não há comentários
+      </h3>
+
+      <p>
+        Este produto ainda não recebeu avaliações.
+      </p>
+      
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- RELACIONADOS -->
+<section class="relacionados-box">
+
+  <h2>Você também pode gostar</h2>
+
+  <div class="grid-produtos" id="relacionados"></div>
+
+</section>
+
+<footer class="rodape">
+
+    <p class="nome">Ateliê A.R</p>
+
+    <p class="contato">
+        <i class="fa-solid fa-phone"></i> (87) 98136-7956 |
+        <i class="fa-solid fa-envelope"></i> ateliear00@gmail.com |
+        <i class="fa-solid fa-location-dot"></i> Brasil
+    </p>
+
+    <p class="direitos">
+        <i class="fa-regular fa-copyright"></i>
+        2026 Ateliê A.R - Todos os direitos reservados
+    </p>
+
+</footer>
+
+<script src="produto-detalhe.js"></script>
+<script src="carrinho.js"></script>
+<script>
+
+// ===============================
+// ALTERAR QUANTIDADE
+// ===============================
+
+function alterarQuantidade(valor) {
+
+  const quantidadeElemento =
+    document.getElementById(
+      "quantidade-produto"
+    );
+
+  let quantidade =
+    parseInt(
+      quantidadeElemento.innerText
+    );
+
+  quantidade += valor;
+
+  // NÃO DEIXA NEGATIVO
+  if (quantidade < 0) {
+
+    quantidade = 0;
+
+  }
+
+  quantidadeElemento.innerText =
+    quantidade;
+
+}
+
+
+//  ATUALIZA CONTADOR
+async function atualizarContadorCarrinho() {
+
+  try {
+
+    const id_usuario =
+      localStorage.getItem("id_usuario");
+
+    if (!id_usuario) return;
+
+    const resposta = await fetch(
+      `http://localhost:3000/carrinho/${id_usuario}`
+    );
+
+    const carrinho =
+      await resposta.json();
+
+    const contador =
+      document.getElementById("contadorCarrinho");
+
+    if (contador) {
+
+      contador.innerText =
+        carrinho.length;
+
+    }
+
+  } catch (erro) {
+
+    console.log(
+      "Erro contador:",
+      erro
+    );
+
+  }
+
+}
+</script>
+
+<script>
+  
+
+
+//  ADICIONAR PRODUTO
+async function adicionarProduto(id_produto) {
+
+  try {
+
+    const id_usuario =
+      localStorage.getItem("id_usuario");
+
+    if (!id_usuario) {
+
+      alert(
+        "Você precisa estar logado!"
+      );
+
+      return;
+    }
+
+    const quantidade = parseInt(
+
+      document.getElementById(
+        "quantidade-produto"
+      ).innerText
+
+    );
+
+    // NÃO DEIXA ADICIONAR 0
+    if (quantidade === 0) {
+
+      alert(
+        "Adicione uma quantidade."
+      );
+
+      return;
+
+    }
+
+    const resposta = await fetch(
+
+      "http://localhost:3000/carrinho/adicionar",
+
+      {
+
+        method: "POST",
+
+        headers: {
+          "Content-Type":
+          "application/json"
+        },
+
+        body: JSON.stringify({
+
+          id_usuario: id_usuario,
+          id_produto: id_produto,
+          quantidade: quantidade
+
+        })
+
+      }
+
+    );
+
+    const mensagem =
+      await resposta.text();
+
+    alert(mensagem);
+
+    atualizarContadorCarrinho();
+
+    // VOLTA PARA 0
+    document.getElementById(
+      "quantidade-produto"
+    ).innerText = 0;
+
+  } catch (erro) {
+
+    console.log(erro);
+
+  }
+
+}
+
+
+//  PERFIL
+document.getElementById("btnPerfil")
+.addEventListener("click", function(e){
+
+    e.preventDefault();
+
+    const id =
+      localStorage.getItem("id_usuario");
+
+    if(id){
+
+        window.location.href =
+          "../html/perfil.html";
+
+    } else {
+
+        window.location.href =
+          "../html/login.html";
+
+    }
+
+});
+
+
+        
+
+       
+
+    
+
+
+
+</script>
+<script src="../javaScript/menu.js"></script> 
+
+<div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+        <div class="vw-plugin-top-wrapper"></div>
+    </div>
+</div>
+
+<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+<script>
+    new window.VLibras.Widget({
+        rootPath: 'https://vlibras.gov.br/app',
+        position: 'BL'
+    });
+</script>
+
+</body>
+</html>

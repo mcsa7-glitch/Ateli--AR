@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre Nós - Ateliê A.R</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        /* ================= HISTÓRIA ================= */
+
+.historia-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    align-items: center;
+}
+
+.galeria-sobre{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.foto-principal{
+    width: 100%;
+    height: 420px;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+.fotos-menores{
+    display: flex;
+    gap: 10px;
+}
+
+.fotos-menores img{
+    width: 100%;
+    max-width: 120px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.fotos-menores img:hover{
+    transform: scale(1.05);
+}
+
+.texto-historia{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.frase-destaque{
+    margin-top: 20px;
+    background: #5e1113;
+    color: white;
+    padding: 18px;
+    border-radius: 12px;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+/* ================= INSTAGRAM ================= */
+
+.instagram-box{
+    background: #fefbf6;
+    padding: 30px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.insta-topo{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 24px;
+    color: #5e1113;
+    margin-bottom: 10px;
+}
+
+.insta-sub{
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.preview-feed{
+    display: flex;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.preview-feed img{
+    width: 100%;
+    max-width: 220px;
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+.btn-instagram{
+    display: inline-block;
+    background: #5e1113;
+    color: white;
+    padding: 12px 22px;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.btn-instagram:hover{
+    opacity: 0.9;
+}
+
+/* ================= INTEGRANTES ================= */
+
+.foto-integrante{
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 15px;
+}
+
+/* ================= RESPONSIVIDADE ================= */
+
+@media(max-width: 900px){
+
+    .historia-grid{
+        grid-template-columns: 1fr;
+    }
+
+    .texto-historia{
+        text-align: center;
+    }
+
+    .frase-destaque{
+        font-size: 16px;
+    }
+
+}
+
+@media(max-width: 768px){
+
+    .titulo-pagina{
+        font-size: 28px;
+    }
+
+    .historia-box,
+    .integrantes-box,
+    .instagram-box{
+        padding: 20px;
+    }
+
+    .historia-box p{
+        font-size: 16px;
+    }
+
+    .preview-feed{
+        flex-direction: column;
+    }
+
+    .preview-feed img{
+        max-width: 100%;
+    }
+
+    .fotos-menores{
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .fotos-menores img{
+        max-width: 90px;
+        height: 80px;
+    }
+
+    .foto-principal{
+        height: 300px;
+    }
+
+}
+
+@media(max-width: 480px){
+
+    .sobre-container{
+        padding: 10px;
+    }
+
+    .titulo-pagina{
+        font-size: 24px;
+    }
+
+    .historia-box p{
+        font-size: 15px;
+        line-height: 1.6;
+    }
+
+    .frase-destaque{
+        font-size: 14px;
+        padding: 15px;
+    }
+
+    .foto-principal{
+        height: 230px;
+    }
+
+    .foto-integrante{
+        width: 110px;
+        height: 110px;
+    }
+
+    .integrante h3{
+        font-size: 18px;
+    }
+
+}
+        .sobre-container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .titulo-pagina {
+            text-align: center;
+            font-size: 36px;
+            color: #5e1113;
+            margin-bottom: 30px;
+        }
+
+        .historia-box, .integrantes-box {
+            background: #fefbf6;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .historia-box h2,
+        .integrantes-box h2 {
+            color: #5e1113;
+            margin-bottom: 15px;
+        }
+
+        .historia-box p {
+            line-height: 1.8;
+            font-size: 18px;
+            color: #333;
+            text-align: justify;
+        }
+
+        .integrantes-lista {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .integrante {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .integrante h3 {
+            color: #5e1113;
+            margin-bottom: 10px;
+        }
+
+        .integrante p {
+            font-size: 16px;
+            color: #555;
+        }
+
+        
+
+        
+    </style>
+</head>
+<body>
+
+   <header>
+
+    <div class="topo">
+
+        <!-- LOGO + NOME -->
+        <div class="logo-container">
+             <img src="../imagens/logo.png" class="logo-img">
+            <h1 class="logo">Ateliê A.R.</h1>
+        </div>
+
+        <!-- MENU -->
+        <nav class="menu">
+            <a href="../html/index.html">Início</a>
+            <a href="../html/sobre.html">Sobre nós</a>
+            <a href="../html/Produto.html">Produtos</a>
+            <a href="../html/rastrear.html">Rastrear pedido</a>
+            <a href="#" id="btnPerfil">Perfil</a>
+            <a href="../html/contato2.html">Contato</a>
+        </nav>
+
+        <!-- CARRINHO -->
+        <div class="acoes">
+            <a href="../html/carrinho.html" class="carrinho">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="contador-carrinho" id="contadorCarrinho">
+            0
+        </span>
+            </a>
+        </div>
+
+    </div>
+
+</header>
+
+
+
+
+<section class="sobre-container">
+
+<h2 class="titulo-pagina">Sobre o Ateliê</h2>
+
+<div class="historia-box">
+
+<h2>Nossa História</h2>
+
+<div class="historia-grid">
+
+<!-- GALERIA -->
+<div class="galeria-sobre">
+
+<img
+src="../imagens/fotoAnny.jpg"
+class="foto-principal"
+id="fotoPrincipal">
+
+<div class="fotos-menores">
+
+<img
+src="../imagens/bastidor1.jpg"
+onclick="trocarFoto(this)">
+
+<img
+src="../imagens/bastidor2.jpg"
+onclick="trocarFoto(this)">
+
+<img
+src="../imagens/bastidor3.jpg"
+onclick="trocarFoto(this)">
+
+</div>
+
+</div>
+
+
+<!-- TEXTO -->
+<div class="texto-historia">
+
+<p>
+Nosso ateliê nasceu a partir de um hobby, unido ao desejo de conquistar minha própria renda trabalhando com algo que eu realmente amo.
+</p>
+
+<p>
+No início, o medo de começar era grande, especialmente de divulgar meu trabalho e não ter retorno. Mesmo assim, decidi dar o primeiro passo.
+</p>
+
+<p>
+Com o tempo fui aprendendo, evoluindo e aperfeiçoando cada peça produzida.
+</p>
+
+<div class="frase-destaque">
+
+Cada peça é feita à mão com muito carinho e dedicação em cada etapa do processo.
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- INSTAGRAM -->
+<div class="instagram-box">
+<div class="insta-topo">
+
+<i class="fa-brands fa-instagram"></i>
+
+<span>@atelie.a.r</span>
+
+</div>
+
+<p class="insta-sub">
+Bastidores • Encomendas • Novidades
+</p>
+
+<p>
+
+Acompanhe o dia a dia do Ateliê A.R., bastidores, processos de criação e novas peças ganhando vida.
+
+</p>
+
+<div class="preview-feed">
+
+<img src="../imagens/feed1.jpg">
+
+<img src="../imagens/feed2.jpg">
+
+</div>
+
+<a
+href="https://instagram.com/atelie.a.r"
+target="_blank"
+class="btn-instagram">
+
+Seguir no Instagram
+
+</a>
+
+</div>
+
+
+<!-- DESENVOLVEDORES -->
+<div class="integrantes-box">
+
+<h2>Desenvolvedores</h2>
+
+<div class="integrantes-lista">
+
+<div class="integrante">
+
+<img
+src="../imagens/mayara.jpg"
+class="foto-integrante">
+
+<h3>Mayara Caroline</h3>
+
+</div>
+
+
+<div class="integrante">
+
+<img
+src="../imagens/anny.jpg"
+class="foto-integrante">
+
+<h3>Anny Radassa</h3>
+
+</div>
+
+
+<div class="integrante">
+
+<img
+src="../imagens/murilo.jpg"
+class="foto-integrante">
+
+<h3>Murilo Cadete</h3>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<footer class="rodape">
+
+    <p class="nome">Ateliê A.R</p>
+
+    <p class="contato">
+        <i class="fa-solid fa-phone"></i> (87) 98136-7956 |
+        <i class="fa-solid fa-envelope"></i> ateliear@email.com |
+        <i class="fa-solid fa-location-dot"></i> Brasil
+    </p>
+
+    <p class="direitos">
+        <i class="fa-regular fa-copyright"></i>
+        2026 Ateliê A.R - Todos os direitos reservados
+    </p>
+
+</footer>
+<script src="../javaScript/jav.js"></script>
+<script src="carrinho.js"></script>
+<script>
+document.getElementById("btnPerfil").addEventListener("click", function(e){
+    e.preventDefault();
+
+    const id = localStorage.getItem("id_usuario");
+
+    if(id){
+        // já está logado
+        window.location.href = "../html/perfil.html";
+    } else {
+        // não está logado
+        window.location.href = "../html/login.html";
+    }
+});
+</script>
+<script src="../javaScript/menu.js"></script> 
+
+<div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+        <div class="vw-plugin-top-wrapper"></div>
+    </div>
+</div>
+
+<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+<script>
+    new window.VLibras.Widget({
+        rootPath: 'https://vlibras.gov.br/app',
+        position: 'BL'
+    });
+</script>
+
+</body>
+</html>
+<script>
+
+function trocarFoto(img){
+
+document.getElementById(
+"fotoPrincipal"
+).src=img.src;
+
+}
+
+</script>

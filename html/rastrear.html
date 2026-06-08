@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Acompanhar pedido</title>
+
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/rastrear.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+.box-avaliacao{
+  margin-top: 15px;
+  background: #fff;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.produto-avaliacao{
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+.estrelas{
+  display: flex;
+  gap: 5px;
+  margin-top: 10px;
+}
+
+.estrelas i{
+  font-size: 24px;
+  color: #ccc;
+  cursor: pointer;
+}
+
+.estrelas i.ativa{
+  color: gold;
+}
+
+.notificacao{
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #333;
+  color: white;
+  padding: 12px 18px;
+  border-radius: 10px;
+  z-index: 9999;
+  opacity: 0;
+  transition: 0.3s;
+}
+
+.notificacao.mostrar{
+  opacity: 1;
+}
+
+textarea{
+  width: 100%;
+  min-height: 80px;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  resize: none;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+  <div class="topo">
+
+    <div class="logo-container">
+      <img src="../imagens/logo.png" class="logo-img">
+      <h1 class="logo">Ateliê A.R.</h1>
+    </div>
+
+    <nav class="menu">
+      <a href="../html/index.html">Início</a>
+      <a href="../html/sobre.html">Sobre nós</a>
+      <a href="../html/Produto.html">Produtos</a>
+      <a href="../html/rastrear.html">Rastrear pedido</a>
+      <a href="#" id="btnPerfil">Perfil</a>
+      <a href="../html/contato2.html">Contato</a>
+    </nav>
+
+    <div class="acoes">
+      <a href="../html/carrinho.html" class="carrinho">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span class="contador-carrinho" id="contadorCarrinho">0</span>
+      </a>
+    </div>
+
+  </div>
+
+</header>
+
+<h2>Meus Pedidos</h2>
+
+<div id="pedidos"></div>
+<h2>Histórico de Pedidos</h2>
+
+<div id="historico"></div>
+
+<div id="notificacao" class="notificacao"></div>
+
+<footer class="rodape">
+
+  <p class="nome">Ateliê A.R</p>
+
+  <p class="contato">
+    <i class="fa-solid fa-phone"></i> (81) 9xxxx-xxxx |
+    <i class="fa-solid fa-envelope"></i> ateliear00@gmail.com |
+    <i class="fa-solid fa-location-dot"></i> Brasil
+  </p>
+
+  <p class="direitos">
+    <i class="fa-regular fa-copyright"></i>
+    2026 Ateliê A.R - Todos os direitos reservados
+  </p>
+
+</footer>
+
+<script>
+
+// ================= PERFIL =================
+document.getElementById("btnPerfil").addEventListener("click", function(e){
+  e.preventDefault();
+
+  const id = localStorage.getItem("id_usuario");
+
+  if(id){
+    window.location.href = "../html/perfil.html";
+  } else {
+    window.location.href = "../html/login.html";
+  }
+});
+
+// ================= PROGRESSO =================
+function getProgresso(status){
+
+  if(!status) return 1;
+
+  status = status.toLowerCase();
+
+  switch(status){
+
+    case "pendente": return 1;
+    case "pago": return 2;
+    case "embalado": return 3;
+    case "enviado": return 4;
+    case "entregue": return 5;
+
+    default: return 1;
+
+  }
+
+}
+
+// ================= CARREGAR PEDIDOS =================
+async function carregarPedidos(){
+
+  try {
+
+    const id_usuario =
+    localStorage.getItem("id_usuario");
+
+    const divPedidos =
+    document.getElementById("pedidos");
+
+    const divHistorico =
+    document.getElementById("historico");
+
+    // NÃO LOGADO
+    if(!id_usuario){
+
+      divPedidos.innerHTML = `
+
+        <div class="pedidos-vazio">
+
+          <i class="fa-solid fa-box-open"></i>
+
+          <h2>
+            Você ainda não tem pedidos
+          </h2>
+
+        </div>
+
+      `;
+
+      divHistorico.innerHTML = `
+
+        <div class="pedidos-vazio">
+
+          <i class="fa-solid fa-clock-rotate-left"></i>
+
+          <h2>
+            Nenhum pedido finalizado
+          </h2>
+
+        </div>
+
+      `;
+
+      return;
+
+    }
+
+    const res = await fetch(
+      `http://localhost:3000/pedidos/usuario/${id_usuario}`
+    );
+
+    const pedidos = await res.json();
+
+    divPedidos.innerHTML = "";
+    divHistorico.innerHTML = "";
+
+    let temHistorico = false;
+
+    // SEM PEDIDOS
+    if(pedidos.length === 0){
+
+      divPedidos.innerHTML = `
+
+        <div class="pedidos-vazio">
+
+          <i class="fa-solid fa-box-open"></i>
+
+          <h2>
+            Você ainda não tem pedidos
+          </h2>
+
+        </div>
+
+      `;
+
+      divHistorico.innerHTML = `
+
+        <div class="pedidos-vazio">
+
+          <i class="fa-solid fa-clock-rotate-left"></i>
+
+          <h2>
+            Nenhum pedido finalizado
+          </h2>
+
+        </div>
+
+      `;
+
+      return;
+
+    }
+
+    pedidos.forEach(p => {
+       console.log("Pedido:", p.id_pedido);
+  console.log("Status vindo da API:", p.status);
+
+      const status =
+      (p.status || "pendente").toLowerCase();
+
+      const progresso =
+      getProgresso(status);
+
+      // ================= ENTREGUE =================
+      if(status === "entregue"){
+
+        temHistorico = true;
+
+        divHistorico.innerHTML += `
+
+          <div class="box">
+
+            <h3>
+  Código do pedido #${p.codigo_pedido}
+</h3>
+
+
+            <p>
+              Total: R$ ${p.total}
+            </p>
+
+            <p>
+
+              Status:
+
+              <span class="status entregue">
+                entregue
+              </span>
+
+            </p>
+
+            <button onclick="detalhesPedido(${p.id_pedido})">
+
+              Ver detalhes
+
+            </button>
+
+<button onclick="abrirAvaliacao(${p.id_pedido})">
+  Ver avaliação
+</button>
+             
+
+            
+
+            <div id="detalhe-${p.id_pedido}"></div>
+
+            <div id="avaliacao-${p.id_pedido}"></div>
+
+          </div>
+
+        `;
+
+      } else {
+
+        // ================= PEDIDOS NORMAIS =================
+        divPedidos.innerHTML += `
+
+          <div class="box">
+
+            <h3>
+  Código do pedido #${p.codigo_pedido}
+</h3>
+
+            <p>
+              Total: R$ ${p.total}
+            </p>
+
+            <p>
+
+              Status:
+
+              <span class="status ${status}">
+                ${status}
+              </span>
+
+            </p>
+
+            <div class="timeline progresso-${progresso}">
+
+              <div class="etapa ${progresso >= 1 ? "ativo" : ""}">
+
+                <div class="bolinha">
+                  <i class="fa-solid fa-cart-shopping"></i>
+                </div>
+
+                <span>
+                  Pedido realizado
+                </span>
+
+              </div>
+
+              <div class="etapa ${progresso >= 2 ? "ativo" : ""}">
+
+                <div class="bolinha">
+                  <i class="fa-solid fa-credit-card"></i>
+                </div>
+
+                <span>
+                  Pagamento confirmado
+                </span>
+
+              </div>
+
+              <div class="etapa ${progresso >= 3 ? "ativo" : ""}">
+
+                <div class="bolinha">
+                  <i class="fa-solid fa-box"></i>
+                </div>
+
+                <span>
+                  Pedido embalado
+                </span>
+
+              </div>
+
+              <div class="etapa ${progresso >= 4 ? "ativo" : ""}">
+
+                <div class="bolinha">
+                  <i class="fa-solid fa-truck"></i>
+                </div>
+
+                <span>
+                  Pedido enviado
+                </span>
+
+              </div>
+
+              <div class="etapa ${progresso >= 5 ? "ativo" : ""}">
+
+                <div class="bolinha">
+                  <i class="fa-solid fa-house"></i>
+                </div>
+
+                <span>
+                  Pedido entregue
+                </span>
+
+              </div>
+
+            </div>
+
+            <button onclick="detalhesPedido(${p.id_pedido})">
+
+              Ver detalhes
+
+            </button>
+
+            <div id="detalhe-${p.id_pedido}"></div>
+
+          </div>
+
+        `;
+
+      }
+
+    });
+
+    // HISTÓRICO VAZIO
+    if(!temHistorico){
+
+      divHistorico.innerHTML = `
+
+        <div class="pedidos-vazio">
+
+          <i class="fa-solid fa-clock-rotate-left"></i>
+
+          <h2>
+            Nenhum pedido finalizado
+          </h2>
+
+        </div>
+
+      `;
+
+    }
+
+  } catch(err){
+
+    console.log(err);
+
+  }
+
+}
+// ================= DETALHES =================
+async function detalhesPedido(id){
+
+  const div = document.getElementById(`detalhe-${id}`);
+
+  if(div.innerHTML !== ""){
+    div.innerHTML = "";
+    return;
+  }
+
+  const res = await fetch(`http://localhost:3000/pedido/${id}`);
+  const data = await res.json();
+
+  div.innerHTML = "<h4>Itens:</h4>";
+
+  data.itens.forEach(i => {
+    div.innerHTML += `
+      <p>${i.nome} - Quantidade: ${i.quantidade} - R$ ${i.preco_unitario}</p>
+    `;
+  });
+}
+// ================= NOTIFICAÇÃO =================
+function mostrarNotificacao(texto){
+
+  const div =
+  document.getElementById("notificacao");
+
+  div.innerText = texto;
+
+  div.classList.add("mostrar");
+
+  setTimeout(() => {
+    div.classList.remove("mostrar");
+  }, 3000);
+
+}
+
+
+// ================= ABRIR AVALIAÇÃO =================
+async function abrirAvaliacao(idPedido){
+
+  const div =
+  document.getElementById(`avaliacao-${idPedido}`);
+
+  if(div.innerHTML !== ""){
+
+    div.innerHTML = "";
+    return;
+
+  }
+
+  const res = await fetch(
+    `http://localhost:3000/pedido/${idPedido}`
+  );
+
+  const data = await res.json();
+
+  div.innerHTML = `
+    <div class="box-avaliacao">
+
+     
+
+      <div id="lista-${idPedido}"></div>
+
+    </div>
+  `;
+
+  const lista =
+  document.getElementById(`lista-${idPedido}`);
+
+  for(const item of data.itens){
+
+    // BUSCA A AVALIAÇÃO DO USUÁRIO
+    const respostaAvaliacao = await fetch(
+
+      `http://localhost:3000/api/avaliacao/${
+        localStorage.getItem("id_usuario")
+      }/${
+        item.id_produto
+      }/${
+        idPedido
+      }`
+
+    );
+
+    const avaliacao =
+    await respostaAvaliacao.json();
+
+    // ================= JÁ EXISTE AVALIAÇÃO =================
+    if(avaliacao && avaliacao.id_avaliacao){
+
+      lista.innerHTML += `
+
+        <div class="produto-avaliacao">
+
+          <h4>${item.nome}</h4>
+
+          <div class="estrelas">
+
+            <i class="fa-solid fa-star
+            ${avaliacao.estrelas >= 1 ? "ativa" : ""}">
+            </i>
+
+            <i class="fa-solid fa-star
+            ${avaliacao.estrelas >= 2 ? "ativa" : ""}">
+            </i>
+
+            <i class="fa-solid fa-star
+            ${avaliacao.estrelas >= 3 ? "ativa" : ""}">
+            </i>
+
+            <i class="fa-solid fa-star
+            ${avaliacao.estrelas >= 4 ? "ativa" : ""}">
+            </i>
+
+            <i class="fa-solid fa-star
+            ${avaliacao.estrelas >= 5 ? "ativa" : ""}">
+            </i>
+
+          </div>
+
+          <textarea disabled>
+${avaliacao.comentario || ""}
+          </textarea>
+
+        </div>
+
+      `;
+
+    } else {
+
+      // ================= AINDA NÃO AVALIOU =================
+      lista.innerHTML += `
+
+        <div class="produto-avaliacao">
+
+          <h4>${item.nome}</h4>
+
+          <div
+          class="estrelas"
+          id="estrelas-${idPedido}-${item.id_produto}">
+
+            <i class="fa-solid fa-star" data-valor="1"></i>
+            <i class="fa-solid fa-star" data-valor="2"></i>
+            <i class="fa-solid fa-star" data-valor="3"></i>
+            <i class="fa-solid fa-star" data-valor="4"></i>
+            <i class="fa-solid fa-star" data-valor="5"></i>
+
+          </div>
+
+          <textarea
+          id="comentario-${idPedido}-${item.id_produto}"
+          placeholder="Digite seu comentário">
+          </textarea>
+
+          <button
+          onclick="enviarAvaliacao(
+            ${idPedido},
+            ${item.id_produto}
+          )">
+
+            Enviar avaliação
+
+          </button>
+
+        </div>
+
+      `;
+
+    }
+
+  }
+
+  // ================= ESTRELAS =================
+  document.querySelectorAll(".estrelas i")
+  .forEach(estrela => {
+
+    estrela.addEventListener("click", () => {
+
+      const valor =
+      estrela.dataset.valor;
+
+      if(!valor) return;
+
+      const pai =
+      estrela.parentElement;
+
+      pai.dataset.valor = valor;
+
+      pai.querySelectorAll("i")
+      .forEach(e => {
+
+        if(e.dataset.valor <= valor){
+
+          e.classList.add("ativa");
+
+        } else {
+
+          e.classList.remove("ativa");
+
+        }
+
+      });
+
+    });
+
+  });
+
+}
+
+// ================= ENVIAR AVALIAÇÃO =================
+async function enviarAvaliacao(
+  idPedido,
+  idProduto,
+){
+
+  try {
+
+    const estrelasDiv =
+    document.getElementById(
+      `estrelas-${idPedido}-${idProduto}`
+    );
+
+    const estrelas =
+    estrelasDiv.dataset.valor;
+
+    if(!estrelas){
+
+      alert(
+        "Selecione as estrelas"
+      );
+
+      return;
+
+    }
+
+    const comentario =
+    document.getElementById(
+      `comentario-${idPedido}-${idProduto}`
+    ).value;
+
+    const resposta = await fetch(
+      "http://localhost:3000/api/avaliacao",
+      {
+
+        method: "POST",
+
+        headers: {
+          "Content-Type":
+          "application/json"
+        },
+
+        body: JSON.stringify({
+
+          id_usuario: Number(
+            localStorage.getItem("id_usuario")
+          ),
+
+          id_produto: Number(idProduto),
+
+          id_pedido: Number(idPedido),
+
+          estrelas: Number(estrelas),
+
+          comentario
+
+        })
+
+      }
+    );
+
+    const dados =
+    await resposta.json();
+
+    if(!resposta.ok){
+
+      alert(dados.erro);
+
+      return;
+
+    }
+
+    alert("Avaliação enviada com sucesso");
+
+    // RECARREGA A ÁREA PARA VIRAR "VER AVALIAÇÃO"
+    abrirAvaliacao(idPedido);
+    abrirAvaliacao(idPedido);
+
+  } catch(err){
+
+    console.log(err);
+
+    alert("Erro ao enviar avaliação");
+
+  }
+
+}
+
+// ================= CARRINHO =================
+async function atualizarContadorCarrinho(){
+
+  try {
+
+    const id_usuario = localStorage.getItem("id_usuario");
+    if(!id_usuario) return;
+
+    const res = await fetch(
+      `http://localhost:3000/carrinho/${id_usuario}`
+    );
+
+    const carrinho = await res.json();
+
+    document.getElementById("contadorCarrinho").innerText =
+      carrinho.length || 0;
+
+  } catch(err){
+    console.log(err);
+  }
+}
+
+atualizarContadorCarrinho();
+carregarPedidos();
+
+</script>
+<script src="../javaScript/menu.js"></script> 
+
+<div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+        <div class="vw-plugin-top-wrapper"></div>
+    </div>
+</div>
+
+<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+<script>
+    new window.VLibras.Widget({
+        rootPath: 'https://vlibras.gov.br/app',
+        position: 'BL'
+    });
+</script>
+
+</body>
+</html>

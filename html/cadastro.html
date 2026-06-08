@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="../css/cadastro.css">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+   <header class="topo">
+  <a href="../html/login.html" class="back-button">
+    <i class="fa-solid fa-arrow-left"></i> Voltar
+  </a>
+
+  <img src="../imagens/logo.png" class="logo-topo" alt="Logo">
+</header>
+
+<div class="container">
+
+
+
+<h1>CADASTRO</h1>
+<form onsubmit="cadastrar(event)">
+
+<label>Nome</label>
+<input type="text" name="nome" placeholder="Digite seu nome" required>
+
+<label>Email</label>
+<input 
+  type="email" 
+  id="email"
+  name="email" 
+  placeholder="Digite seu email" 
+  required
+  pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
+  title="Digite um e-mail válido (ex: exemplo@email.com)"
+  oninput="validarEmail(this)"
+>
+
+<div id="msg"></div>
+
+<label>Telefone</label>
+<input type="text" onkeyup="formatarTelefone(this)" name="telefone" maxlength="11" placeholder="( ) _____-____">
+
+<label>Endereço</label>
+<input 
+    type="text" 
+    name="endereco" 
+    placeholder="Digite seu endereço"
+    required
+>
+
+<label>Senha</label>
+
+<div class="campo-senha">
+    <input 
+        type="password" 
+        id="senha"
+        name="senha" 
+        placeholder="Digite sua senha"
+        minlength="8"
+        required
+    >
+
+    <i class="fa-solid fa-eye" id="toggleSenha"></i>
+</div>
+
+<div id="mensagem_erro"></div>
+
+<button type="submit">Cadastrar</button>
+
+<p class="links">
+Já tem conta? 
+<a href="login.html">ENTRAR</a>
+</p>
+
+</form>
+
+</div>
+<script>
+function validarEmail() {
+  const email = document.getElementById("email").value;
+  const msg = document.getElementById("msg");
+
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (email === "") {
+    msg.innerText = "O campo não pode estar vazio!";
+    msg.style.color = "red";
+  } 
+}
+</script>
+
+<script>
+const form = document.querySelector("form");
+const senha = document.getElementById("senha");
+const erro = document.getElementById("mensagem_erro");
+
+form.addEventListener("submit", function(e){
+
+    if(senha.value.length < 8){
+        e.preventDefault();
+        erro.innerText = "A senha precisa ter pelo menos 8 caracteres.";
+        erro.style.color = "red";
+    }
+
+});
+</script>
+<script>
+const senha2 = document.getElementById("senha");
+const olho = document.getElementById("toggleSenha");
+
+olho.addEventListener("click", function(){
+
+    if(senha2.type === "password"){
+        senha2.type = "text";
+        olho.classList.remove("fa-eye");
+        olho.classList.add("fa-eye-slash");
+    } else {
+        senha2.type = "password";
+        olho.classList.remove("fa-eye-slash");
+        olho.classList.add("fa-eye");
+    }
+
+});
+</script>
+<script>
+
+  function formatarTelefone(input) {
+  // Remove todos os caracteres nĆ£o numĆ©ricos
+  var telefone = input.value.replace(/\D/g, '');
+
+  // Insere os parĆŖnteses, espaĆ§o e traĆ§o nos lugares corretos
+  telefone = telefone.replace(/(\d{2})(\d{5})(\d{4})/, '($1)$2-$3');
+
+  // Atualiza o valor do campo de entrada com o telefone formatado
+  input.value = telefone;
+}
+  </script>
+<script src="../javaScript/cadastro.js"></script>
+<script src="../javaScript/menu.js"></script> 
+
+<div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+        <div class="vw-plugin-top-wrapper"></div>
+    </div>
+</div>
+
+<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+<script>
+    new window.VLibras.Widget({
+        rootPath: 'https://vlibras.gov.br/app',
+        position: 'BL'
+    });
+</script>
+</body>
+</html>

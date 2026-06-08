@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Painel Admin</title>
+
+ <style>
+
+body{
+  font-family: Arial;
+  background:#f7f4f4;
+  padding:20px;
+}
+
+/* TÍTULO */
+h1{
+  color:#5e1113;
+  margin-bottom: 20px;
+}
+
+/* CARD PRINCIPAL */
+.box{
+  background:white;
+  padding:20px;
+  border-radius:12px;
+  margin-bottom:20px;
+
+  box-shadow:0 6px 18px rgba(0,0,0,0.08);
+
+  border-top: 5px solid #5e1113;
+  transition: 0.3s;
+}
+
+.box:hover{
+  transform: translateY(-2px);
+}
+
+/* INPUTS */
+input, textarea, select{
+  width:100%;
+  padding:12px;
+
+  margin-top:10px;
+  margin-bottom:10px;
+
+  border-radius:10px;
+  border:1px solid #ddd;
+
+  outline:none;
+  transition:0.3s;
+
+  box-sizing:border-box;
+}
+
+textarea{
+  resize:none;
+  overflow:hidden;
+  min-height:80px;
+}
+
+input:focus, textarea:focus, select:focus{
+  border-color:#5e1113;
+  box-shadow:0 0 5px rgba(94,17,19,0.2);
+}
+
+/* BOTÃO */
+button{
+  background:#5e1113;
+  color:white;
+
+  border:none;
+  padding:12px 16px;
+
+  border-radius:10px;
+  cursor:pointer;
+
+  transition:0.3s;
+  font-weight:bold;
+}
+
+button:hover{
+  background:#7a1a1d;
+  transform: scale(1.02);
+}
+
+/* ITEM */
+.item{
+  border:1px solid #eee;
+  padding:12px;
+  margin-top:10px;
+
+  border-radius:12px;
+  background:#fafafa;
+
+  transition: 0.3s;
+}
+
+.item:hover{
+  background:#fff;
+  box-shadow:0 4px 10px rgba(0,0,0,0.05);
+}
+
+.btn-sair{
+
+  background: #5e1113;
+
+  color: white;
+
+  border: none;
+
+  padding: 14px 28px;
+
+  border-radius: 12px;
+
+  font-size: 16px;
+
+  font-weight: bold;
+
+  cursor: pointer;
+
+  display: block;
+
+  margin: 0 auto 25px auto;
+
+  transition: 0.3s;
+
+}
+
+.btn-sair:hover{
+
+  background: #7a1a1d;
+
+  transform: scale(1.03);
+
+}
+textarea{
+  width:100%;
+  min-height:80px;
+
+  resize:none;
+  overflow:hidden;
+
+  white-space:pre-wrap;
+  word-wrap:break-word;
+  overflow-wrap:break-word;
+
+  box-sizing:border-box;
+}
+@media (max-width: 768px){
+
+  body{
+    padding:10px;
+  }
+
+  .box{
+    padding:15px;
+  }
+
+  textarea{
+    min-height:120px;
+    font-size:16px;
+  }
+
+  input,
+  textarea,
+  select,
+  button{
+    font-size:16px;
+  }
+
+}
+@media (max-width: 480px){
+
+  body{
+    padding:5px;
+  }
+
+  h1{
+    font-size:24px;
+  }
+
+  h2{
+    font-size:20px;
+  }
+
+  .box{
+    padding:10px;
+  }
+
+  input,
+  textarea,
+  select,
+  button{
+    font-size:14px;
+    padding:10px;
+  }
+
+  textarea{
+    min-height:150px;
+  }
+
+  .item{
+    padding:10px;
+    overflow-wrap:break-word;
+    word-break:break-word;
+  }
+
+  .btn-sair{
+    width:100%;
+  }
+
+}
+@media (max-width: 360px){
+
+  h1{
+    font-size:20px;
+  }
+
+  h2{
+    font-size:18px;
+  }
+
+  input,
+  textarea,
+  select,
+  button{
+    font-size:13px;
+    padding:8px;
+  }
+
+  textarea{
+    min-height:180px;
+  }
+
+}
+</style>
+
+</head>
+
+<body>
+
+<h1>Painel do Administrador</h1>
+
+<!-- ================= PRODUTOS ================= -->
+
+<div class="box">
+
+  <h2>Adicionar Produto</h2>
+
+  <input type="text" id="nome" placeholder="Nome do produto">
+
+  <textarea id="descricao" placeholder="Descrição"></textarea>
+
+  <input type="number" id="preco" placeholder="Preço" step="0.01" min="0">
+
+  <input type="file" id="imagem" accept="image/*">
+<input type="file" id="imagem2" accept="image/*">
+<input type="file" id="imagem3" accept="image/*">
+ 
+
+  <input type="text" id="categoria" placeholder="Categoria">
+
+  <button onclick="adicionarProduto()">
+    Adicionar Produto
+  </button>
+
+</div>
+
+<div class="box">
+
+  <h2>Produtos</h2>
+
+  <div id="produtos"></div>
+
+</div>
+
+<!-- ================= PEDIDOS ================= -->
+
+<div class="box">
+
+  <h2>Pedidos</h2>
+
+  <div id="pedidos"></div>
+
+</div>
+
+<button class="btn-sair" onclick="sair()">
+  Sair da conta
+</button>
+
+<script>
+
+  // ================= PRODUTOS =================
+  async function adicionarProduto(){
+
+  const formData = new FormData();
+
+  formData.append(
+    "nome",
+    document.getElementById("nome").value
+  );
+
+  formData.append(
+    "descricao",
+    document.getElementById("descricao").value
+  );
+
+  formData.append(
+    "preco",
+    document.getElementById("preco").value
+  );
+
+  formData.append(
+    "categoria",
+    document.getElementById("categoria").value
+  );
+
+  const imagem =
+    document.getElementById("imagem").files[0];
+
+  const imagem2 =
+    document.getElementById("imagem2").files[0];
+
+  const imagem3 =
+    document.getElementById("imagem3").files[0];
+
+  if(imagem){
+    formData.append("imagem", imagem);
+  }
+
+  if(imagem2){
+    formData.append("imagem2", imagem2);
+  }
+
+  if(imagem3){
+    formData.append("imagem3", imagem3);
+  }
+
+  try {
+
+    const res = await fetch(
+      "http://localhost:3000/admin/produtos",
+      {
+        method: "POST",
+        body: formData
+      }
+    );
+
+    const msg = await res.text();
+
+    document.getElementById("nome").value = "";
+    document.getElementById("descricao").value = "";
+    document.getElementById("preco").value = "";
+    document.getElementById("imagem").value = "";
+    document.getElementById("imagem2").value = "";
+    document.getElementById("imagem3").value = "";
+    document.getElementById("categoria").value = "";
+
+    alert(msg);
+
+    carregarProdutos();
+
+  } catch(err) {
+
+    console.error(err);
+
+    alert("Erro ao adicionar produto");
+
+  }
+
+}
+
+  async function carregarProdutos(){
+
+    const res = await fetch("http://localhost:3000/admin/produtos");
+    const produtos = await res.json();
+
+    const div = document.getElementById("produtos");
+    div.innerHTML = "";
+
+    produtos.forEach(p => {
+
+  div.innerHTML += `
+  <div class="item">
+
+    <input
+      id="nome-${p.id}"
+      value="${p.nome}"
+      disabled
+    >
+
+    <textarea
+      id="descricao-${p.id}"
+      disabled
+    >${p.descricao}</textarea>
+
+    <input
+      id="preco-${p.id}"
+      value="${p.preco}"
+      disabled
+    >
+
+    <input
+      id="imagem-${p.id}"
+      placeholder="URL da imagem"
+      value="${p.imagem || ''}"
+      disabled
+    >
+
+    <input
+      id="imagem2-${p.id}"
+      placeholder="URL da imagem 2"
+      value="${p.imagem2 || ''}"
+      disabled
+    >
+
+    <input
+      id="imagem3-${p.id}"
+      placeholder="URL da imagem 3"
+      value="${p.imagem3 || ''}"
+      disabled
+    >
+
+    <input
+      id="categoria-${p.id}"
+      placeholder="Categoria"
+      value="${p.categoria || ''}"
+      disabled
+    >
+
+    <button
+      id="btn-${p.id}"
+      onclick="editarProduto(${p.id})"
+    >
+      Editar
+    </button>
+
+    <button onclick="excluirProduto(${p.id})">
+      Excluir
+    </button>
+
+  </div>
+  `;
+});
+document
+  .querySelectorAll("textarea")
+  .forEach(textarea => {
+
+    textarea.style.height = "auto";
+
+    textarea.style.height =
+      textarea.scrollHeight + "px";
+
+  });
+
+  }
+
+  async function excluirProduto(id){
+
+    if(!confirm("Tem certeza que deseja excluir?")) return;
+
+    const res = await fetch(`http://localhost:3000/admin/produtos/${id}`, {
+      method: "DELETE"
+    });
+
+    const data = await res.json();
+    alert(data.mensagem || data.erro);
+
+    carregarProdutos();
+  }
+
+ async function editarProduto(id){
+
+  const nome =
+    document.getElementById(`nome-${id}`);
+
+  const descricao =
+    document.getElementById(`descricao-${id}`);
+
+  const preco =
+    document.getElementById(`preco-${id}`);
+
+  const imagem =
+    document.getElementById(`imagem-${id}`);
+
+  const imagem2 =
+    document.getElementById(`imagem2-${id}`);
+
+  const imagem3 =
+    document.getElementById(`imagem3-${id}`);
+
+  const categoria =
+    document.getElementById(`categoria-${id}`);
+
+  const btn =
+    document.getElementById(`btn-${id}`);
+
+ if(btn.textContent.includes("Editar")){
+
+    nome.disabled = false;
+    descricao.disabled = false;
+    preco.disabled = false;
+    imagem.disabled = false;
+    imagem2.disabled = false;
+    imagem3.disabled = false;
+    categoria.disabled = false;
+
+    btn.textContent =
+      "Salvar Alterações";
+
+    return;
+  }
+
+  const res = await fetch(
+    `http://localhost:3000/admin/produtos/${id}`,
+    {
+      method:"PUT",
+      headers:{
+        "Content-Type":"application/json"
+      },
+      body: JSON.stringify({
+        nome: nome.value,
+        descricao: descricao.value,
+        preco: preco.value,
+        imagem: imagem.value,
+        imagem2: imagem2.value,
+        imagem3: imagem3.value,
+        categoria: categoria.value
+      })
+    }
+  );
+
+  const data = await res.json();
+
+  alert(data.mensagem);
+
+  nome.disabled = true;
+  descricao.disabled = true;
+  preco.disabled = true;
+  imagem.disabled = true;
+  imagem2.disabled = true;
+  imagem3.disabled = true;
+  categoria.disabled = true;
+
+  btn.textContent = "Editar";
+}
+
+  // ================= PEDIDOS =================
+  async function carregarPedidos(){
+
+    const res = await fetch("http://localhost:3000/admin/pedidos");
+    const pedidos = await res.json();
+
+    const div = document.getElementById("pedidos");
+    div.innerHTML = "";
+
+    pedidos.forEach(pedido => {
+
+      div.innerHTML += `
+  <div class="item">
+
+   <h3>Código do pedido #${pedido.codigo_pedido}</h3>
+
+    <p><strong>Cliente:</strong> ${pedido.nome}</p>
+
+   <p>
+  <strong>Endereço:</strong><br>
+
+  ${pedido.rua}, Nº ${pedido.numero}<br>
+
+  Bairro: ${pedido.bairro}<br>
+
+  CEP: ${pedido.cep}<br>
+
+  Complemento:
+  ${pedido.complemento || "Nenhum"}
+</p>
+
+    <p><strong>Total:</strong> R$ ${pedido.total}</p>
+
+    <p><strong>Status atual:</strong> ${pedido.status || "Sem status"}</p>
+
+    <!-- STATUS -->
+    <select id="status-${pedido.id_pedido}">
+
+      <option value="pendente"
+        ${pedido.status === "pendente" ? "selected" : ""}>
+        pendente
+      </option>
+
+      <option value="pago"
+        ${pedido.status === "pago" ? "selected" : ""}>
+        pago
+      </option>
+
+      <option value="embalado"
+        ${pedido.status === "embalado" ? "selected" : ""}>
+        embalado
+      </option>
+
+      <option value="enviado"
+        ${pedido.status === "enviado" ? "selected" : ""}>
+        enviado
+      </option>
+
+      <option value="entregue"
+        ${pedido.status === "entregue" ? "selected" : ""}>
+        entregue
+      </option>
+
+    </select>
+
+    <button onclick="atualizarStatus(${pedido.id_pedido})">
+      Atualizar
+    </button>
+
+  </div>
+`;
+    });
+
+  }
+
+  async function atualizarStatus(id){
+
+    const status = document.getElementById(`status-${id}`).value;
+
+    const res = await fetch(`http://localhost:3000/admin/pedido/status/${id}`, {
+      method: "PUT",
+      headers: {"Content-Type":"application/json"},
+      body: JSON.stringify({status})
+    });
+
+    const data = await res.json();
+    alert(data.mensagem || "Atualizado");
+
+    carregarPedidos();
+  }
+
+  function sair(){
+
+  localStorage.removeItem("id_usuario");
+
+  window.location.href = "login.html";
+
+}
+
+  // ================= INICIAL =================
+  carregarProdutos();
+  carregarPedidos();
+
+</script>
+
+</body>
+</html>

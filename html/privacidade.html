@@ -1,0 +1,154 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Política de Privacidade - Ateliê A.R.</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background: linear-gradient(135deg, #fefbf6, #fefbf6);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:30px;
+}
+
+.container{
+    background:#ffffff;
+    max-width:900px;
+    width:100%;
+    padding:40px;
+    border-radius:20px;
+    box-shadow:0 8px 25px rgba(94, 17, 19, 0.15);
+}
+
+h1{
+    color:#5e1113;
+    text-align:center;
+    margin-bottom:25px;
+    border-bottom:3px solid #5e1113;
+    padding-bottom:10px;
+}
+
+h2{
+    color:#8b1e22;
+    margin-top:25px;
+    margin-bottom:10px;
+}
+
+p{
+    color:#555;
+    line-height:1.8;
+    text-align:justify;
+}
+
+.btn-voltar{
+    position:fixed;
+    top:20px;
+    left:20px;
+    background: linear-gradient(135deg, #5e1113, #8b1e22);
+    color:white;
+    text-decoration:none;
+    padding:12px 20px;
+    border-radius:30px;
+    font-size:15px;
+    font-weight:bold;
+    transition:0.3s;
+    box-shadow:0 4px 10px rgba(0,0,0,0.2);
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+}
+
+.btn-voltar:hover{
+    background:#5e1113;
+    transform:translateY(-2px);
+}
+
+@media(max-width:768px){
+    .container{
+        padding:25px;
+    }
+
+    h1{
+        font-size:28px;
+    }
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../html/login.html" class="btn-voltar"><i class="fa-solid fa-arrow-left"></i> Voltar</a>
+
+<div class="container">
+
+<h1>Política de Privacidade</h1>
+
+<p>
+O Ateliê A.R. valoriza a privacidade e a segurança das informações de seus usuários. Esta política explica como coletamos, utilizamos e protegemos os dados fornecidos durante a utilização da plataforma.
+</p>
+
+<h2>1. Coleta de Dados</h2>
+<p>
+Coletamos informações necessárias para o funcionamento da plataforma, como nome, e-mail, telefone, endereço de entrega e dados de acesso à conta.
+</p>
+
+<h2>2. Uso das Informações</h2>
+<p>
+Os dados coletados são utilizados para realizar cadastros, processar pedidos, fornecer suporte aos usuários, melhorar nossos serviços e garantir a segurança da plataforma.
+</p>
+
+<h2>3. Segurança dos Dados</h2>
+<p>
+Adotamos medidas de segurança para proteger as informações dos usuários contra acessos não autorizados, alterações, divulgação ou destruição indevida dos dados.
+</p>
+
+<h2>4. Compartilhamento de Informações</h2>
+<p>
+O Ateliê A.R. não comercializa dados pessoais. As informações poderão ser compartilhadas apenas quando necessário para processamento de pagamentos, entregas ou cumprimento de obrigações legais.
+</p>
+
+<h2>5. Direitos dos Usuários</h2>
+<p>
+Os usuários podem solicitar a atualização, correção ou exclusão de seus dados pessoais, observadas as exigências legais aplicáveis.
+</p>
+
+<h2>6. Contato</h2>
+<p>
+Em caso de dúvidas sobre esta Política de Privacidade, entre em contato com a equipe de suporte do Ateliê A.R. através dos canais de atendimento disponibilizados na plataforma.
+</p>
+
+</div>
+<script src="../javaScript/menu.js"></script> 
+
+<div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+        <div class="vw-plugin-top-wrapper"></div>
+    </div>
+</div>
+
+<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+<script>
+    new window.VLibras.Widget({
+        rootPath: 'https://vlibras.gov.br/app',
+        position: 'BL'
+    });
+</script>
+
+</body>
+</html>

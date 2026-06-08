@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ateliê A.R</title>
+
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/carrinho.css">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+<body>
+
+<header>
+
+  <div class="topo">
+
+    <div class="logo-container">
+       <img src="../imagens/logo.png" class="logo-img">
+      <h1 class="logo">Ateliê A.R.</h1>
+    </div>
+
+    <nav class="menu">
+      <a href="../html/index.html">Início</a>
+      <a href="../html/sobre.html">Sobre nós</a>
+      <a href="../html/Produto.html">Produtos</a>
+      <a href="../html/rastrear.html">Rastrear pedido</a>
+      <a href="#" id="btnPerfil">Perfil</a>
+      <a href="../html/contato2.html">Contato</a>
+    </nav>
+
+    <div class="acoes">
+      <a href="../html/carrinho.html" class="carrinho">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span class="contador-carrinho" id="contadorCarrinho">0</span>
+      </a>
+    </div>
+
+  </div>
+
+</header>
+
+<h2>Meu Carrinho</h2>
+
+<div class="area-carrinho">
+
+  <!-- PRODUTOS -->
+  <div id="carrinho"></div>
+
+  <!-- RESUMO -->
+  <div class="resumo">
+
+    <h2>Resumo</h2>
+
+    <div class="resumo-conteudo">
+
+      <!-- SUBTOTAL -->
+      <div class="linha">
+        <span>Subtotal</span>
+        <span id="subtotal">R$ 0</span>
+      </div>
+
+      <!-- FRETE (INPUT + BOTÃO) -->
+      <div class="linha">
+        <span>Calcular frete</span>
+        <input type="text" id="cep" placeholder="Digite seu CEP" maxlength="9">
+      </div>
+
+      <button class="btn-frete" onclick="calcularFrete()">
+        Calcular frete
+      </button>
+      <div class="linha">
+  <span>Local</span>
+  <span id="local">---</span>
+</div>
+
+      <!-- FRETE -->
+      <div class="linha">
+        <span>Frete</span>
+        <span id="frete">R$ 0</span>
+      </div>
+
+      <!-- TOTAL -->
+      <div class="linha total">
+        <span>Total</span>
+        <span id="total">R$ 0</span>
+      </div>
+
+    </div>
+
+    <button id="finalizar">FINALIZAR</button>
+
+  </div>
+
+</div>
+
+<footer class="rodape">
+
+    <p class="nome">Ateliê A.R</p>
+
+    <p class="contato">
+        <i class="fa-solid fa-phone"></i> (87) 98136-7956 |
+        <i class="fa-solid fa-envelope"></i> ateliear00@gmail.com |
+        <i class="fa-solid fa-location-dot"></i> Brasil
+    </p>
+
+    <p class="direitos">
+        <i class="fa-regular fa-copyright"></i>
+        2026 Ateliê A.R - Todos os direitos reservados
+    </p>
+
+</footer>
+
+<script src="carrinho.js"></script>
+<script src="../javaScript/jav.js"></script>
+
+<script>
+document.getElementById("btnPerfil")
+.addEventListener("click", function(e){
+  e.preventDefault();
+
+  const id = localStorage.getItem("id_usuario");
+
+  if(id){
+    window.location.href = "../html/perfil.html";
+  } else {
+    window.location.href = "../html/login.html";
+  }
+});
+</script>
+
+<script>
+
+// máscara CEP
+const cepInput = document.getElementById("cep");
+
+cepInput.addEventListener("input", function(e){
+
+  let valor = e.target.value;
+
+  valor = valor.replace(/\D/g, "");
+
+  valor = valor.substring(0, 8);
+
+  valor = valor.replace(
+    /^(\d{5})(\d)/,
+    "$1-$2"
+  );
+
+  e.target.value = valor;
+
+});
+
+// verificar produtos
+function temProdutos(){
+
+  const itens =
+  document.querySelectorAll(".selecionar-item:checked");
+
+  return itens.length > 0;
+
+}
+
+// verificar frete
+function freteCalculado(){
+
+  const frete =
+  document.getElementById("frete")
+  .innerText;
+
+  return frete !== "R$ 0";
+
+}
+
+// frete
+async function calcularFrete(){
+
+  if(!temProdutos()){
+
+    alert(
+      "Adicione produtos no carrinho!"
+    );
+
+    return;
+
+  }
+
+  const cep =
+  document.getElementById("cep")
+  .value
+  .replace(/\D/g, "");
+
+  // validar tamanho
+  if(cep.length !== 8){
+
+  document.getElementById("local")
+  .innerHTML = "---";
+
+  document.getElementById("frete")
+  .innerHTML = "R$ 0";
+
+  alert("CEP inválido!");
+
+  return;
+}
+
+  try {
+
+    const resposta =
+    await fetch(
+      `https://viacep.com.br/ws/${cep}/json/`
+    );
+
+    const dados =
+    await resposta.json();
+
+    // CEP não existe
+    if(dados.erro){
+
+  document.getElementById("local")
+  .innerHTML = "---";
+
+  document.getElementById("frete")
+  .innerHTML = "R$ 0";
+
+  const subtotalTexto =
+    document.getElementById("subtotal")
+    .innerText
+    .replace("R$", "")
+    .replace(",", ".");
+
+  document.getElementById("total")
+  .innerHTML =
+  `R$ ${Number(subtotalTexto).toFixed(2)}`;
+
+  alert("CEP não encontrado!");
+
+  return;
+}
+
+    // mostrar local
+    document.getElementById("local")
+    .innerHTML =
+    `${dados.localidade} - ${dados.uf}`;
+
+    let frete = 0;
+
+    if(dados.uf === "PE"){
+
+      frete = 10;
+
+    } else {
+
+      frete = 20;
+
+    }
+
+    document.getElementById("frete")
+    .innerHTML = `R$ ${frete}`;
+
+    localStorage.setItem(
+      "frete",
+      frete
+    );
+
+    localStorage.setItem(
+      "cep",
+      cep
+    );
+
+    const subtotalTexto =
+      document.getElementById("subtotal")
+      .innerText
+      .replace("R$", "")
+      .replace(",", ".");
+
+    const subtotal =
+    Number(subtotalTexto);
+
+    document.getElementById("total")
+    .innerHTML =
+    `R$ ${(subtotal + frete).toFixed(2)}`;
+
+  } catch (erro) {
+
+    console.log(erro);
+
+    alert("Erro ao calcular frete!");
+
+  }
+
+}
+
+// finalizar
+document
+.getElementById("finalizar")
+.addEventListener("click", () => {
+
+  if(!temProdutos()){
+
+    alert(
+      "Seu carrinho está vazio!"
+    );
+
+    return;
+
+  }
+
+  if(!freteCalculado()){
+
+    alert(
+      "Calcule o frete primeiro!"
+    );
+
+    return;
+
+  }
+
+  window.location.href =
+  "../html/finalizar.html";
+
+});
+
+</script>
+<script src="../javaScript/menu.js"></script> 
+
+<div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+        <div class="vw-plugin-top-wrapper"></div>
+    </div>
+</div>
+
+<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+<script>
+    new window.VLibras.Widget({
+        rootPath: 'https://vlibras.gov.br/app',
+        position: 'BL'
+    });
+</script>
+
+
+
+</body>
+</html>

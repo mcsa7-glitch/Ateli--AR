@@ -1,0 +1,533 @@
+@import url('https://fonts.googleapis.com/css2?family=Arial:wght@400;700&display=swap');
+
+/* =========================
+BASE
+========================= */
+body {
+  font-family: Arial, sans-serif;
+  background: #f7f4f4;
+}
+
+/* =========================
+TÍTULO
+========================= */
+h2 {
+  text-align: center;
+
+  margin-top: 40px;
+  margin-bottom: 35px;
+
+  font-size: 26px;
+
+  color: #5e1113;
+
+  font-weight: bold;
+}
+
+/* =========================
+CARD PEDIDO
+========================= */
+.box {
+  width: 90%;
+  max-width: 850px;
+  margin: 20px auto;
+  background: #fff;
+  border-radius: 18px;
+  padding: 20px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  border-left: 6px solid #5e1113;
+  transition: 0.3s;
+   margin: 20px auto 80px auto;
+}
+
+
+.box:hover {
+  transform: translateY(-3px);
+}
+
+
+
+/* =========================
+STATUS
+========================= */
+.status {
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 13px;
+}
+
+/* 🔴 PENDENTE */
+.status.pendente {
+  background: #ffe5e5;
+  color: #d32f2f;
+}
+
+/* 🟢 PAGO */
+.status.pago {
+  background: #e7f8ea;
+  color: #1b8a3a;
+}
+
+/* =========================
+TIMELINE
+========================= */
+.timeline {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 25px;
+  position: relative;
+}
+
+/* linha base (cinza) */
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: 20px;
+  left: 5%;
+  right: 5%;
+  height: 4px;
+  background: #ddd;
+  border-radius: 10px;
+  z-index: 0;
+}
+
+/* progresso VINHO */
+.timeline.progresso-1::before { background: linear-gradient(to right, #5e1113 20%, #ddd 20%); }
+.timeline.progresso-2::before { background: linear-gradient(to right, #5e1113 40%, #ddd 40%); }
+.timeline.progresso-3::before { background: linear-gradient(to right, #5e1113 60%, #ddd 60%); }
+.timeline.progresso-4::before { background: linear-gradient(to right, #5e1113 80%, #ddd 80%); }
+.timeline.progresso-5::before { background: #5e1113; }
+
+/* etapa */
+.etapa {
+  flex: 1;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* bolinha */
+.bolinha {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  color: #777;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+/* texto embaixo */
+.etapa span {
+  display: block;
+  margin-top: 6px;
+  font-size: 12px;
+  color: #777;
+}
+
+/* ativo (VINHO) */
+.etapa.ativo .bolinha {
+  background: #5e1113;
+  color: white;
+}
+
+.etapa.ativo span {
+  color: #5e1113;
+  font-weight: bold;
+}
+
+/* =========================
+BOTÃO VER DETALHES
+========================= */
+button {
+  margin-top: 15px;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 10px;
+  background: #5e1113;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #7a1a1d;
+}
+
+/* =========================
+DETALHES
+========================= */
+#pedidos div[id^="detalhe"] {
+  margin-top: 10px;
+  padding: 10px;
+  background: #fafafa;
+  border-radius: 10px;
+}
+
+/* =========================
+PEDIDO VAZIO 
+========================= */
+.pedidos-vazio{
+
+  text-align: center;
+  padding: 70px 20px;
+
+  background: #fff;
+  width: 90%;
+  max-width: 850px;
+
+  margin: 30px auto;
+
+  border-radius: 18px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+
+ border-top: 6px solid #5e1113;
+}
+
+.pedidos-vazio i{
+
+  font-size: 65px;
+  color: #5e1113;
+  margin-bottom: 18px;
+}
+
+.pedidos-vazio h2{
+
+  font-size: 26px;
+  color: #5e1113;
+  margin-bottom: 10px;
+}
+
+.pedidos-vazio p{
+
+  color: #777;
+  font-size: 16px;
+}
+
+/* =========================
+        RESPONSIVO
+========================= */
+@media (max-width: 1024px) {
+
+  .box {
+
+    width: 95%;
+
+    max-width: 700px;
+
+    padding: 18px;
+  }
+
+  h2 {
+
+    font-size: 24px;
+
+    margin-top: 30px;
+
+    margin-bottom: 30px;
+  }
+
+  .timeline {
+
+    gap: 10px;
+  }
+
+  .bolinha {
+
+    width: 38px;
+    height: 38px;
+
+    font-size: 15px;
+  }
+
+  .etapa span {
+
+    font-size: 11px;
+  }
+
+  button {
+
+    padding: 10px 16px;
+
+    font-size: 14px;
+  }
+
+  .pedidos-vazio {
+
+    width: 95%;
+
+    max-width: 700px;
+
+    padding: 60px 20px;
+  }
+
+  .pedidos-vazio h2 {
+
+    font-size: 24px;
+  }
+
+  .pedidos-vazio p {
+
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .timeline {
+
+    flex-direction: column;
+    gap: 20px;
+
+    position: relative;
+
+    padding-left: 30px;
+  }
+
+  /* linha vertical */
+ .timeline::before {
+
+  display: block;
+
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  bottom: 0;
+
+  left: 51px;
+
+  width: 4px;
+
+  height: 100%;
+
+  background: #ddd;
+
+  border-radius: 10px;
+
+  transform: translateX(-50%);
+}
+
+  /* progresso vinho */
+  .timeline.progresso-1::before {
+    background: linear-gradient(to bottom, #5e1113 20%, #ddd 20%);
+  }
+
+  .timeline.progresso-2::before {
+    background: linear-gradient(to bottom, #5e1113 40%, #ddd 40%);
+  }
+
+  .timeline.progresso-3::before {
+    background: linear-gradient(to bottom, #5e1113 60%, #ddd 60%);
+  }
+
+  .timeline.progresso-4::before {
+    background: linear-gradient(to bottom, #5e1113 80%, #ddd 80%);
+  }
+
+  .timeline.progresso-5::before {
+    background: #5e1113;
+  }
+
+  .etapa {
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    text-align: left;
+
+    position: relative;
+
+    z-index: 1;
+  }
+
+  .etapa span {
+    margin-top: 0;
+  }
+
+  .bolinha {
+    margin: 0;
+  }
+  
+}
+
+/* =========================
+RESPONSIVO CELULAR PEQUENO
+========================= */
+@media (max-width: 480px) {
+
+  h2 {
+    font-size: 20px;
+    margin-top: 90px;
+    margin-bottom: 25px;
+    padding: 0 10px;
+  }
+
+  .box {
+
+    width: 92%;
+    max-width: 320px;
+
+    padding: 14px;
+
+    margin: 15px auto 70px auto;
+  }
+
+  .pedidos-vazio{
+
+    width: 92%;
+
+    max-width: 320px;
+
+   padding: 70px 18px;
+    margin: 20px auto;
+
+    border-radius: 18px;
+  }
+
+  .pedidos-vazio i{
+
+    font-size: 50px;
+
+    margin-bottom: 6px;
+  }
+
+  .pedidos-vazio h2{
+
+    margin-top: 0;
+
+    margin-bottom: 8px;
+
+    font-size: 20px;
+  }
+
+  .pedidos-vazio p{
+
+    font-size: 14px;
+
+    line-height: 1.4;
+  }
+
+
+
+  .timeline{
+
+    flex-direction: column;
+
+    gap: 18px;
+
+    position: relative;
+
+    padding-left: 22px;
+  }
+
+  /* linha vertical */
+  .timeline::before{
+
+    display: block;
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    bottom: 0;
+
+    left: 40px;
+
+    transform: translateX(-50%);
+
+    width: 4px;
+
+    height: 100%;
+
+    background: #ddd;
+
+    border-radius: 10px;
+  }
+
+  /* progresso vinho */
+  .timeline.progresso-1::before {
+    background: linear-gradient(to bottom, #5e1113 20%, #ddd 20%);
+  }
+
+  .timeline.progresso-2::before {
+    background: linear-gradient(to bottom, #5e1113 40%, #ddd 40%);
+  }
+
+  .timeline.progresso-3::before {
+    background: linear-gradient(to bottom, #5e1113 60%, #ddd 60%);
+  }
+
+  .timeline.progresso-4::before {
+    background: linear-gradient(to bottom, #5e1113 80%, #ddd 80%);
+  }
+
+  .timeline.progresso-5::before {
+    background: #5e1113;
+  }
+
+  .etapa{
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    position: relative;
+
+    z-index: 1;
+  }
+
+  .bolinha{
+
+    width: 36px;
+    height: 36px;
+
+    font-size: 14px;
+
+    flex-shrink: 0;
+  }
+
+  .etapa span{
+
+    font-size: 11px;
+
+    margin-top: 0;
+
+    text-align: left;
+  }
+
+  button{
+
+    width: 100%;
+
+    padding: 12px;
+
+    font-size: 14px;
+  }
+
+  
+
+  .pedidos-vazio i{
+    font-size: 50px;
+  }
+
+  .pedidos-vazio h2{
+    font-size: 22px;
+  }
+
+  .pedidos-vazio p{
+    font-size: 14px;
+  }
+}

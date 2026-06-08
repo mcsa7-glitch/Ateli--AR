@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contato - Ateliê A.R</title>
+
+<link rel="stylesheet" href="../css/contato.css">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+<body>
+
+<header>
+  <div class="topo">
+
+    <div class="logo-container">
+       <img src="../imagens/logo.png" class="logo-img">
+      <h1 class="logo">Ateliê A.R.</h1>
+    </div>
+
+    <nav class="menu">
+      <a href="../html/index.html">Início</a>
+      <a href="../html/sobre.html">Sobre nós</a>
+      <a href="../html/Produto.html">Produtos</a>
+      <a href="../html/rastrear.html">Rastrear pedido</a>
+      <a href="#" id="btnPerfil">Perfil</a>
+      <a href="../html/contato2.html">Contato</a>
+    </nav>
+
+    <div class="acoes">
+      <a href="../html/carrinho.html" class="carrinho">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span class="contador-carrinho" id="contadorCarrinho">
+            0
+        </span>
+      </a>
+    </div>
+
+  </div>
+</header>
+
+<h2 class="titulo-contato">Contato</h2>
+
+<div class="cards-suporte">
+
+  <!-- WHATSAPP -->
+  <a href="https://wa.me/5587981367956?text=Olá%2C%20vim%20pelo%20site%20do%20Ateliê%20A.R!" 
+     target="_blank" 
+     class="caixa-suporte whatsapp">
+    <i class="fa-brands fa-whatsapp"></i>
+    <span>WhatsApp</span>
+  </a>
+
+  <!-- EMAIL -->
+  <a href="mailto:ateliear00@gmail.com?subject=Contato&body=Olá,%20vim%20pelo%20site!" 
+     class="caixa-suporte email">
+    <i class="fa-solid fa-envelope"></i>
+    <span>E-mail</span>
+  </a>
+
+</div>
+
+<!-- MAPA -->
+<div class="mapa-wrapper">
+
+  <iframe
+    src="https://www.google.com/maps?q=-8.7632050,-36.3986010&output=embed"
+    loading="lazy">
+  </iframe>
+
+  <div class="mapa-card">
+    <h4>Ateliê A.R</h4>
+    <p>Jupi / PE</p>
+
+    <div class="mapa-icons">
+
+      <a href="https://maps.google.com/?q=-8.7632050,-36.3986010" target="_blank">
+        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+      </a>
+
+      <a href="https://www.google.com/maps/dir/?api=1&destination=-8.7632050,-36.3986010" target="_blank">
+        <i class="fa-solid fa-route"></i>
+      </a>
+
+    </div>
+  </div>
+
+</div>
+
+<footer class="rodape">
+
+  <p class="nome">Ateliê A.R</p>
+
+  <p class="contato">
+    <i class="fa-solid fa-phone"></i> (87) 98136-7956 |
+    <i class="fa-solid fa-envelope"></i> ateliear00@gmail.com |
+    <i class="fa-solid fa-location-dot"></i> Brasil
+  </p>
+
+  <p class="direitos">
+    <i class="fa-regular fa-copyright"></i>
+    2026 Ateliê A.R - Todos os direitos reservados
+  </p>
+
+</footer>
+<script src="carrinho.js"></script>
+
+<script>
+document.getElementById("btnPerfil").addEventListener("click", function(e){
+  e.preventDefault();
+
+  const id = localStorage.getItem("id_usuario");
+
+  if(id){
+    window.location.href = "../html/perfil.html";
+  } else {
+    window.location.href = "../html/login.html";
+  }
+});
+</script>
+<script src="../javaScript/menu.js"></script> 
+
+<div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+        <div class="vw-plugin-top-wrapper"></div>
+    </div>
+</div>
+
+<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+<script>
+    new window.VLibras.Widget({
+        rootPath: 'https://vlibras.gov.br/app',
+        position: 'BL'
+    });
+</script>
+
+</body>
+</html>

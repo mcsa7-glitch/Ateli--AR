@@ -1,0 +1,247 @@
+/* 🌍 Fundo */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+
+  background: linear-gradient(135deg, #fefbf6, #fefbf6);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+/* 📦 Caixa principal */
+.container {
+  background: #ffffff;
+  padding: 40px;
+  width: 360px;
+  margin-top: 5%;
+  border-radius: 20px;
+
+  box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+
+  text-align: center;
+
+  border-top: 6px solid #5e1113;
+
+  position: relative;
+}
+
+/* 🖼️ TODAS AS IMAGENS RESPONSIVAS */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* 📝 Título */
+h1 {
+  color: #5e1113;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+}
+
+/* Labels */
+label {
+  display: block;
+  text-align: left;
+  margin-top: 12px;
+  color: #5e1113;
+}
+
+/* ✏️ Inputs */
+input {
+  width: 100%;
+  padding: 12px;
+  margin-top: 5px;
+
+  border: 1px solid #ddd;
+  border-radius: 10px;
+
+  outline: none;
+  transition: 0.3s;
+
+  box-sizing: border-box;
+}
+
+/* ✨ Focus */
+input:focus {
+  border-color: #5e1113;
+  box-shadow: 0 0 8px rgba(94, 17, 19, 0.2);
+}
+
+/* 📧 Email (não editável) */
+#email {
+  background-color: #f0f0f0;
+  color: #666;
+}
+
+/* 🔘 Botão padrão */
+button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 20px;
+
+  background: linear-gradient(135deg, #5e1113, #8b1e22);
+
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+
+  font-size: 16px;
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+/* 🖼️ Logo (MENOR E RESPONSIVA) */
+.logo-topo {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+
+  width: clamp(50px, 10vw, 80px); /* 🔥 aumentado */
+  height: auto;
+}
+
+/* Hover botão */
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(94, 17, 19, 0.4);
+}
+
+/* 🚫 Botão excluir */
+.excluir {
+  margin-top: 10px;
+
+  background: linear-gradient(135deg, #5e1113, #8b1e22);
+}
+
+.excluir:hover {
+  box-shadow: 0 5px 15px rgba(217, 83, 79, 0.4);
+}
+
+/* 🔙 Botão voltar */
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+
+  padding: 10px 18px;
+
+  background: linear-gradient(135deg, #5e1113, #8b1e22);
+  color: #fff;
+
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: bold;
+
+  box-shadow: 0 5px 15px rgba(94, 17, 19, 0.4);
+
+  transition: 0.3s;
+}
+
+.back-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(94, 17, 19, 0.5);
+}
+
+/* ✏️ Botão editar (SÓ ÍCONE) */
+.edit-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+
+  background: none;
+  border: none;
+  outline: none;
+  border-radius: 10px; /* se retora fica circula o fundo do editar*/
+
+  color: #5e1113;
+  font-size: 28px;
+
+  cursor: pointer;
+
+  padding: 10px;       /* tamanho do fundo do editar espaço para clicar */
+  width: auto;      /* remove largura 100% */
+  margin: 0;        /* remove margem global */
+}
+
+.edit-button:hover {
+  transform: scale(1.1);
+  color: #5e1113;
+}
+
+/* Modo edição */
+.edit-button.editing {
+  color: #5e1113;
+}
+.senha-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.senha-container input {
+    width: 100%;
+    padding-right: 40px; /* espaço pro olho dentro do input */
+    box-sizing: border-box;
+}
+
+.senha-container i {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    font-size: 18px;
+    color: #555;
+    cursor: pointer;
+}
+/* 📱 RESPONSIVIDADE */
+@media (max-width: 540px) {
+.container {
+    background: #ffffff;
+    padding: 40px;
+    width: 360px;
+    margin-top: 50%;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    border-top: 6px solid #5e1113;
+    position: relative;
+}
+  
+}
+@media (max-width: 480px) {
+
+  .container {
+    padding: 25px;
+    margin-top: 20px;
+            position: absolute;
+        top: 90px;
+
+  }
+
+  h1 {
+    font-size: 22px;
+  }
+
+  .back-button {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+
+  .logo-topo {
+    top: 10px;
+    right: 10px;
+  }
+
+  .captcha-box {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+}

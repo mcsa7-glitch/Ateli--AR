@@ -1,0 +1,89 @@
+/* SEÇÃO PRODUTOS */
+.produtos {
+    padding: 40px 20px;
+}
+
+
+/* TÍTULO */
+.titulo-produtos {
+    text-align: center;
+    font-size: 26px;
+    color: #5e1113;
+    margin-bottom: 30px;
+}
+
+/* GRID */
+.grid-produtos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 25px;
+}
+
+/* CARD */
+.produto {
+    background: #fefbf6;
+    padding: 15px;
+    border-radius: 12px;
+    text-align: center;
+
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: 0.3s;
+}
+
+.produto:hover {
+    transform: translateY(-5px);
+}
+
+/* 🔥 QUADRO DA IMAGEM */
+.produto img {
+    width: 100%;
+    height: 200px; /* tamanho padrão do quadro */
+
+    object-fit: contain; /* 🔥 encaixa a imagem sem cortar */
+
+    background: #fefbf6; /* cor do fundo */
+    border-radius: 12px;
+
+    display: block;
+    margin: 0 auto;
+}
+
+/* NOME */
+.produto h3 {
+    margin: 10px 0;
+    color: #5e1113;
+}
+
+/* PREÇO */
+.preco {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* BOTÃO */
+.produto button {
+    background: #5e1113;
+    color: #fefbf6;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+
+    width: 100%;
+    transition: 0.3s;
+}
+
+.produto button:hover {
+    background: #7a1a1d;
+}
+
+@media (max-width: 500px) {
+    .grid-produtos {
+     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+}
+.link-produto {
+    text-decoration: none;
+    color: inherit;
+    display:block;
+}

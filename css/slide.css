@@ -1,0 +1,154 @@
+.slider {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  margin-top: 0; /* não usa valor fixo */
+  margin-bottom: 0;
+}
+
+.slider-content {
+  display: flex;
+  transition: transform 1s ease-in-out;
+}
+
+/* Cada slide ocupa 100% */
+.slide-box {
+  flex: 0 0 100%;
+}
+
+/* IMAGEM (mantém seu padrão original) */
+.slide-box img {
+  width: 100%;
+   height: auto; /* mantém altura visual bonita */
+  object-fit: cover;
+}
+
+
+/* ================= SETAS ================= */
+
+.slider-btn {
+
+    position: absolute;
+
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: 55px;
+    height: 55px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: rgba(0, 0, 0, 0.4);
+
+    color: #fefbf6;
+
+    font-size: 24px;
+
+    cursor: pointer;
+
+    z-index: 10;
+
+    opacity: 0;
+
+    transition: 0.3s ease;
+}
+
+/* MOSTRAR AO PASSAR O MOUSE */
+.slider:hover .slider-btn {
+    opacity: 1;
+}
+
+/* HOVER */
+.slider-btn:hover {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+/* ESQUERDA */
+.prev {
+    left: 10px;
+}
+
+/* DIREITA maior a distancia entre a tela */
+.next {
+    right: 10px;
+}
+
+/* ================= BOLINHAS ================= */
+
+.nav-manual {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    margin-top: 12px;
+}
+
+/* BOLINHAS */
+.manual-btn {
+
+    width: 14px;
+    height: 14px;
+
+    border-radius: 50%;
+
+    border: 2px solid #5e1113;
+
+    margin: 5px;
+
+    cursor: pointer;
+
+    transition: 0.3s ease;
+}
+
+/* BOLINHA ATIVA */
+.manual-btn.ativo {
+    background: #5e1113;
+}
+
+/* RESPONSIVO */
+
+@media (min-width: 10px) and (max-width: 670px) {
+  .slider {
+    margin-top: 30px;
+  }
+  .slider-btn {
+
+        width: 38px;
+        height: 38px;
+
+        font-size: 15px;
+    }
+
+    .prev {
+        left: 5px;
+    }
+
+    .next {
+        right: 5px;
+    }
+}
+
+/* PONTINHOS */
+.nav-manual {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.manual-btn {
+  width: 15px;
+  height: 15px;
+  border: 2px solid #5e1113;
+  border-radius: 50%;
+  margin: 5px;
+  cursor: pointer;
+  transition: background-color 0.4s ease;
+}
+
+.manual-btn.ativo {
+  background-color: #5e1113;
+}
