@@ -5,12 +5,12 @@ document.addEventListener("DOMContentLoaded", function () {
   const categoria = params.get("categoria");
 
   let url =
-    "http://localhost:3000/produtos/destaques";
+    "https://ateli-ar.onrender.com/produtos/destaques";
 
   if (categoria) {
 
     url =
-      `http://localhost:3000/produtos/categoria/${categoria}`;
+      `https://ateli-ar.onrender.com/produtos/categoria/${categoria}`;
 
   }
 
@@ -245,7 +245,7 @@ document.addEventListener(
 
         const resposta = await fetch(
 
-          "http://localhost:3000/carrinho/adicionar",
+          "https://ateli-ar.onrender.com/carrinho/adicionar",
 
           {
 
