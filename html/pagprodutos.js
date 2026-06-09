@@ -35,12 +35,12 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   let url =
-    "http://localhost:3000/produtos";
+    "https://ateli-ar.onrender.com/produtos";
 
   if (categoria) {
 
     url =
-      `http://localhost:3000/produtos/categoria/${categoria}`;
+      `https://ateli-ar.onrender.com/produtos/categoria/${categoria}`;
 
   }
 
@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       function getImageUrl(img){
         if(!img) return "../imagens/placeholder.png";
-        if(img.startsWith("/uploads")) return `http://localhost:3000${img}`;
+        if(img.startsWith("/uploads")) return `https://ateli-ar.onrender.com${img}`;
         if(img.startsWith("http")) return img;
         if(img.startsWith("/")) return img;
         return `../imagens/${img}`;
@@ -287,7 +287,7 @@ document.addEventListener(
 
         const resposta = await fetch(
 
-          "http://localhost:3000/carrinho/adicionar",
+          "https://ateli-ar.onrender.com/carrinho/adicionar",
 
           {
 
@@ -365,7 +365,7 @@ async function atualizarContadorCarrinho() {
 
     const resposta = await fetch(
 
-      `http://localhost:3000/carrinho/${id_usuario}`
+      `https://ateli-ar.onrender.com/carrinho/${id_usuario}`
 
     );
 
