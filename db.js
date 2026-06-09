@@ -6,7 +6,10 @@ const db = new Pool({
   host: "dpg-d8jdd2dckfvc73cnaiig-a.oregon-postgres.render.com",
   database: "atelie_u37m",
   password: "uyECjhJGBCLm2qpUxSkxdVfTJueDPpnT",
-  port: 5432
+  port: 5432,
+  ssl: {
+    rejectUnauthorized: false
+  }
 });
 
 module.exports = db;
