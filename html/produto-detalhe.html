@@ -352,7 +352,7 @@ async function atualizarContadorCarrinho() {
     if (!id_usuario) return;
 
     const resposta = await fetch(
-      `http://localhost:3000/carrinho/${id_usuario}`
+      `https://ateli-ar.onrender.com/carrinho/${id_usuario}`
     );
 
     const carrinho =
@@ -422,7 +422,7 @@ async function adicionarProduto(id_produto) {
 
     const resposta = await fetch(
 
-      "http://localhost:3000/carrinho/adicionar",
+      "https://ateli-ar.onrender.com/carrinho/adicionar",
 
       {
 

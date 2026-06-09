@@ -47,7 +47,7 @@ app.use("/", pedidoRoutes);
 app.listen(process.env.PORT, () => {
 
   console.log(
-    "Servidor rodando em http://localhost:3000"
+    "Servidor rodando em https://ateli-ar.onrender.com"
   );
 
 });

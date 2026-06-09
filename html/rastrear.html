@@ -215,7 +215,7 @@ async function carregarPedidos(){
     }
 
     const res = await fetch(
-      `http://localhost:3000/pedidos/usuario/${id_usuario}`
+      `https://ateli-ar.onrender.com/pedidos/usuario/${id_usuario}`
     );
 
     const pedidos = await res.json();
@@ -460,7 +460,7 @@ async function detalhesPedido(id){
     return;
   }
 
-  const res = await fetch(`http://localhost:3000/pedido/${id}`);
+  const res = await fetch(`https://ateli-ar.onrender.com/pedido/${id}`);
   const data = await res.json();
 
   div.innerHTML = "<h4>Itens:</h4>";
@@ -502,7 +502,7 @@ async function abrirAvaliacao(idPedido){
   }
 
   const res = await fetch(
-    `http://localhost:3000/pedido/${idPedido}`
+    `https://ateli-ar.onrender.com/pedido/${idPedido}`
   );
 
   const data = await res.json();
@@ -525,7 +525,7 @@ async function abrirAvaliacao(idPedido){
     // BUSCA A AVALIAÇÃO DO USUÁRIO
     const respostaAvaliacao = await fetch(
 
-      `http://localhost:3000/api/avaliacao/${
+      `https://ateli-ar.onrender.com/api/avaliacao/${
         localStorage.getItem("id_usuario")
       }/${
         item.id_produto
@@ -692,7 +692,7 @@ async function enviarAvaliacao(
     ).value;
 
     const resposta = await fetch(
-      "http://localhost:3000/api/avaliacao",
+      "https://ateli-ar.onrender.com/api/avaliacao",
       {
 
         method: "POST",
@@ -757,7 +757,7 @@ async function atualizarContadorCarrinho(){
     if(!id_usuario) return;
 
     const res = await fetch(
-      `http://localhost:3000/carrinho/${id_usuario}`
+      `https://ateli-ar.onrender.com/carrinho/${id_usuario}`
     );
 
     const carrinho = await res.json();

@@ -21,7 +21,7 @@ const confirmarSenhaInput = document.getElementById("confirmarSenha");
 // ===============================
 async function carregarDados() {
     try {
-        const res = await fetch(`http://localhost:3000/usuarios/usuario/${id}`);
+        const res = await fetch(`https://ateli-ar.onrender.com/usuarios/usuario/${id}`);
 
         if (!res.ok) throw new Error("Erro ao buscar usuário");
 
@@ -117,7 +117,7 @@ document.getElementById("salvar").addEventListener("click", async () => {
     }
 
     try {
-        const res = await fetch(`http://localhost:3000/usuarios/usuario/${id}`, {
+        const res = await fetch(`https://ateli-ar.onrender.com/usuarios/usuario/${id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
@@ -178,7 +178,7 @@ document.getElementById("excluir").addEventListener("click", async () => {
     if (confirm("Tem certeza que deseja excluir sua conta?")) {
 
         try {
-            const res = await fetch(`http://localhost:3000/usuarios/usuario/${id}`, {
+            const res = await fetch(`https://ateli-ar.onrender.com/usuarios/usuario/${id}`, {
                 method: "DELETE"
             });
 

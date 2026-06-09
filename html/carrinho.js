@@ -39,7 +39,7 @@ async function carregarCarrinho() {
   try {
 
     const resposta = await fetch(
-      `http://localhost:3000/carrinho/${localStorage.getItem("id_usuario")}`
+      `https://ateli-ar.onrender.com/carrinho/${localStorage.getItem("id_usuario")}`
     );
 
     const itens = await resposta.json();
@@ -198,7 +198,7 @@ function toggleItem(id, checkbox) {
 async function removerItem(id_item) {
 
   await fetch(
-    `http://localhost:3000/carrinho/item/${id_item}`,
+    `https://ateli-ar.onrender.com/carrinho/item/${id_item}`,
     { method: "DELETE" }
   );
 
@@ -215,7 +215,7 @@ async function alterarQuantidade(id_item, novaQuantidade) {
   }
 
   await fetch(
-    `http://localhost:3000/carrinho/item/${id_item}`,
+    `https://ateli-ar.onrender.com/carrinho/item/${id_item}`,
     {
       method: "PUT",
       headers: {
@@ -245,7 +245,7 @@ async function atualizarContadorCarrinho() {
   }
 
   const resposta = await fetch(
-    `http://localhost:3000/carrinho/${idUsuario}`
+    `https://ateli-ar.onrender.com/carrinho/${idUsuario}`
   );
 
   const itens = await resposta.json();

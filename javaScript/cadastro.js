@@ -33,7 +33,7 @@ async function cadastrar(event) {
   try {
 
     const res = await fetch(
-      "http://localhost:3000/usuarios/cadastro",
+      "https://ateli-ar.onrender.com/usuarios/cadastro",
       {
 
         method: "POST",

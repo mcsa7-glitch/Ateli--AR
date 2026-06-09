@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const params = new URLSearchParams(window.location.search);
   const categoria = params.get("categoria");
 
-  fetch(`http://localhost:3000/produtos/categoria/${categoria}`)
+  fetch(`https://ateli-ar.onrender.com/produtos/categoria/${categoria}`)
     .then(res => res.json())
     .then(produtos => {
 

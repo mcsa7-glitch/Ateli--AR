@@ -342,7 +342,7 @@ textarea{
   try {
 
     const res = await fetch(
-      "http://localhost:3000/admin/produtos",
+      "https://ateli-ar.onrender.com/admin/produtos",
       {
         method: "POST",
         body: formData
@@ -375,7 +375,7 @@ textarea{
 
   async function carregarProdutos(){
 
-    const res = await fetch("http://localhost:3000/admin/produtos");
+    const res = await fetch("https://ateli-ar.onrender.com/admin/produtos");
     const produtos = await res.json();
 
     const div = document.getElementById("produtos");
@@ -462,7 +462,7 @@ document
 
     if(!confirm("Tem certeza que deseja excluir?")) return;
 
-    const res = await fetch(`http://localhost:3000/admin/produtos/${id}`, {
+    const res = await fetch(`https://ateli-ar.onrender.com/admin/produtos/${id}`, {
       method: "DELETE"
     });
 
@@ -515,7 +515,7 @@ document
   }
 
   const res = await fetch(
-    `http://localhost:3000/admin/produtos/${id}`,
+    `https://ateli-ar.onrender.com/admin/produtos/${id}`,
     {
       method:"PUT",
       headers:{
@@ -551,7 +551,7 @@ document
   // ================= PEDIDOS =================
   async function carregarPedidos(){
 
-    const res = await fetch("http://localhost:3000/admin/pedidos");
+    const res = await fetch("https://ateli-ar.onrender.com/admin/pedidos");
     const pedidos = await res.json();
 
     const div = document.getElementById("pedidos");
@@ -627,7 +627,7 @@ document
 
     const status = document.getElementById(`status-${id}`).value;
 
-    const res = await fetch(`http://localhost:3000/admin/pedido/status/${id}`, {
+    const res = await fetch(`https://ateli-ar.onrender.com/admin/pedido/status/${id}`, {
       method: "PUT",
       headers: {"Content-Type":"application/json"},
       body: JSON.stringify({status})

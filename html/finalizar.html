@@ -102,7 +102,7 @@ async function carregarCarrinho() {
   try {
 
     const resposta = await fetch(
-      `http://localhost:3000/carrinho/${localStorage.getItem("id_usuario")}`
+      `https://ateli-ar.onrender.com/carrinho/${localStorage.getItem("id_usuario")}`
     );
 
     let carrinho = await resposta.json();
@@ -304,7 +304,7 @@ document.getElementById("finalizar")
 
     const respostaCarrinho =
       await fetch(
-        `http://localhost:3000/carrinho/${localStorage.getItem("id_usuario")}`
+        `https://ateli-ar.onrender.com/carrinho/${localStorage.getItem("id_usuario")}`
       );
 
     let produtos = await respostaCarrinho.json();
@@ -426,7 +426,7 @@ if (!pedido.bairro.trim()) {
 }
 
     const resposta =
-      await fetch("http://localhost:3000/criar-pagamento", {
+      await fetch("https://ateli-ar.onrender.com/criar-pagamento", {
 
         method: "POST",
         headers: {
@@ -446,7 +446,7 @@ if (dados.init_point) {
   produtos.map(produto => produto.id_item);
 
 await fetch(
-  "http://localhost:3000/carrinho/limpar-selecionados",
+  "https://ateli-ar.onrender.com/carrinho/limpar-selecionados",
   {
     method: "DELETE",
     headers: {

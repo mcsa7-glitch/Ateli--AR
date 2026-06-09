@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // BUSCAR PRODUTO
   // ===============================
 
-  fetch(`http://localhost:3000/produtos/${id}`)
+  fetch(`https://ateli-ar.onrender.com/produtos/${id}`)
 
     .then(res => res.json())
 
@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       function getImageUrl(img){
         if(!img) return "../imagens/placeholder.png";
-        if(img.startsWith("/uploads")) return `http://localhost:3000${img}`;
+        if(img.startsWith("/uploads")) return `https://ateli-ar.onrender.com${img}`;
         if(img.startsWith("http")) return img;
         if(img.startsWith("/")) return img;
         return `../imagens/${img}`;
@@ -206,7 +206,7 @@ async function atualizarContadorCarrinho() {
 
     const resposta = await fetch(
 
-      `http://localhost:3000/carrinho/${id_usuario}`
+      `https://ateli-ar.onrender.com/carrinho/${id_usuario}`
 
     );
 
@@ -258,7 +258,7 @@ function trocarImagem(img, elemento) {
 function carregarRelacionados(categoria) {
 
   fetch(
-    `http://localhost:3000/produtos/categoria/${categoria}`
+    `https://ateli-ar.onrender.com/produtos/categoria/${categoria}`
   )
 
     .then(res => res.json())
@@ -389,7 +389,7 @@ async function adicionarProdutoPrincipal() {
 
     const resposta = await fetch(
 
-      "http://localhost:3000/carrinho/adicionar",
+      "https://ateli-ar.onrender.com/carrinho/adicionar",
 
       {
 
@@ -482,7 +482,7 @@ async function adicionarProdutoRelacionados(
 
     const resposta = await fetch(
 
-      "http://localhost:3000/carrinho/adicionar",
+      "https://ateli-ar.onrender.com/carrinho/adicionar",
 
       {
 
@@ -558,7 +558,7 @@ localStorage.getItem("id_usuario") || 0;
 
 const resposta = await fetch(
 
-  `http://localhost:3000/api/avaliacao/${id_produto}?id_usuario=${id_usuario}`
+  `https://ateli-ar.onrender.com/api/avaliacao/${id_produto}?id_usuario=${id_usuario}`
 
 );
 
@@ -816,7 +816,7 @@ async function curtirAvaliacao(
 
     const resposta = await fetch(
 
-      "http://localhost:3000/api/avaliacao/util",
+      "https://ateli-ar.onrender.com/api/avaliacao/util",
 
       {
 

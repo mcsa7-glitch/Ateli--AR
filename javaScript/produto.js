@@ -1,6 +1,6 @@
 async function carregarProdutos() {
   try {
-    const resposta = await fetch("http://localhost:3000/produtos");
+    const resposta = await fetch("https://ateli-ar.onrender.com/produtos");
     const produtos = await resposta.json();
 
     const lista = document.getElementById("lista-produtos");
