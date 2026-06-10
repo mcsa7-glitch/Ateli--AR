@@ -85,9 +85,9 @@ class PedidoController {
           body: {
             items: itensMercadoPago,
             back_urls: {
-      success: "https://ateli-ar.onrender.com/html/rastrear.html",
-      failure: "https://ateli-ar.onrender.com/html/falha.html",
-      pending: "https://ateli-ar.onrender.com/html/pendente.html"
+      success: "https://ateli-ar.onrender.com/html/sucesso.html?status=success",
+      failure: "https://ateli-ar.onrender.com/html/falha.html?status=falha",
+      pending: "https://ateli-ar.onrender.com/html/pendente.html?status=pendente"
     },
           },
           

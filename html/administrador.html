@@ -586,16 +586,6 @@ document
     <!-- STATUS -->
     <select id="status-${pedido.id_pedido}">
 
-      <option value="pendente"
-        ${pedido.status === "pendente" ? "selected" : ""}>
-        pendente
-      </option>
-
-      <option value="pago"
-        ${pedido.status === "pago" ? "selected" : ""}>
-        pago
-      </option>
-
       <option value="embalado"
         ${pedido.status === "embalado" ? "selected" : ""}>
         embalado

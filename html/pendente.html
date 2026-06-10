@@ -86,5 +86,19 @@
       <a href="../html/index.html" class="btn btn-secondary">Ir para Home</a>
     </div>
   </div>
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const status = urlParams.get("status");
+    await fetch(`https://ateli-ar.onrender.com/admin/pedido/status/${localStorage.getItem("id_pedido")}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        id_usuario: Number(localStorage.getItem("id_usuario")),
+        status: "pendente"
+      })
+    });
+  </script>
 </body>
 </html>
