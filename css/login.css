@@ -276,3 +276,69 @@ button i {
   }
 
 }
+
+/* === Estilos para páginas de resultado (sucesso / falha / pendente) === */
+.checkmark, .error-icon, .pending-icon {
+  width: 80px;
+  height: 80px;
+  border: 4px solid;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  font-size: 50px;
+}
+.checkmark {
+  border-color: #4caf50;
+  color: #4caf50;
+}
+.error-icon {
+  border-color: #f44336;
+  color: #f44336;
+}
+.pending-icon {
+  border-color: #ff9800;
+  color: #ff9800;
+}
+
+.botoes {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.btn {
+  padding: 12px 30px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #5e1113, #8b1e22);
+  color: white;
+}
+.btn-primary:hover {
+  filter: brightness(0.95);
+}
+
+.btn-secondary {
+  background: #f0f0f0;
+  color: #333;
+}
+.btn-secondary:hover {
+  background: #e0e0e0;
+}
+
+@media (max-width: 480px) {
+  .container {
+    max-width: 95%;
+  }
+}
