@@ -881,9 +881,7 @@
     padding: 12px;
   }
 
-  #relacionados{
-    grid-template-columns: 2fr;
-  }
+  
 
   .avaliacao-card{
     padding: 12px;
