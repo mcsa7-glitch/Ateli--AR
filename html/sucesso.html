@@ -90,7 +90,7 @@
     const status = new URLSearchParams(window.location.search).get("status");
 
   fetch(`https://ateli-ar.onrender.com/admin/pedido/status/${localStorage.getItem("id_pedido")}`, {
-    method: "POST",
+    method: "PUT",
     headers: {
       "Content-Type": "application/json"
     },
