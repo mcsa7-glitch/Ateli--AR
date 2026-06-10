@@ -438,7 +438,7 @@ if (!pedido.bairro.trim()) {
       });
 
     const dados = await resposta.json();
-      localStorage.setItem("id_pedido", JSON.stringify(pedido.id_pedido));
+      localStorage.setItem("id_pedido", dados.pedido_id);
 if (dados.init_point) {
 
   // LIMPA CARRINHO
