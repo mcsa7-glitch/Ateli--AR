@@ -182,11 +182,8 @@ document.addEventListener("DOMContentLoaded", function () {
   titulo.textContent =
     "Chaveiros";
 
-  fetch(
-    "https://ateli-ar.onrender.com/produtos/categoria/chaveiros"
-
+  fetch("https://ateli-ar.onrender.com/produtos/categoria/chaveiros")
     .then(res => res.json())
-
     .then(produtos => {
 
       const lista =

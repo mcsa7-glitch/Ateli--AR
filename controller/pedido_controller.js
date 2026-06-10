@@ -83,8 +83,14 @@ class PedidoController {
       const result =
         await preference.create({
           body: {
-            items: itensMercadoPago
-          }
+            items: itensMercadoPago,
+            back_urls: {
+      success: "https://atelie-ar.onrender.com/html/rastrear.html",
+      failure: "https://atelie-ar.onrender.com/html/falha.html",
+      pending: "https://atelie-ar.onrender.com/html/pendente.html"
+    },
+          },
+          
         });
 
       await PedidoModel.atualizarPagamento(
