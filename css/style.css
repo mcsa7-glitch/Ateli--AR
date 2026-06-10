@@ -533,3 +533,7 @@ margin-bottom:15px;
     background: #f4f4f4 !important;
 }
 
+@media (max-width: 480px) {
+   .menu a{
+        padding: 6px 6px;
+}}
