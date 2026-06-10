@@ -133,7 +133,7 @@ textarea{
   //status vindo da URL (sucesso);
 const satatus = new URLSearchParams(window.location.search).get("status");
 if(status){
- await fetch(`https://ateli-ar.onrender.com/admin/pedido/status/${localStorage.getItem("id_pedido")}`, {
+  fetch(`https://ateli-ar.onrender.com/admin/pedido/status/${localStorage.getItem("id_pedido")}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"

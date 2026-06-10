@@ -89,7 +89,7 @@
   <script>
     const urlParams = new URLSearchParams(window.location.search);
     const status = urlParams.get("status");
-    await fetch(`https://ateli-ar.onrender.com/admin/pedido/status/${localStorage.getItem("id_pedido")}`, {
+     fetch(`https://ateli-ar.onrender.com/admin/pedido/status/${localStorage.getItem("id_pedido")}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json"

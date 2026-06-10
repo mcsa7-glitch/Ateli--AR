@@ -89,7 +89,7 @@
   <script>
    const status = new URLSearchParams(window.location.search).get("status");
    if (status === "falha") {
-    await fetch(`https://ateli-ar.onrender.com/admin/pedido/status/${localStorage.getItem("id_pedido")}`, {
+    fetch(`https://ateli-ar.onrender.com/admin/pedido/status/${localStorage.getItem("id_pedido")}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json"

@@ -86,5 +86,19 @@
       <a href="../html/perfil.html" class="btn btn-secondary">Meus Pedidos</a>
     </div>
   </div>
+  <script>
+    const status = new URLSearchParams(window.location.search).get("status");
+
+  fetch(`https://ateli-ar.onrender.com/admin/pedido/status/${localStorage.getItem("id_pedido")}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      id_usuario: Number(localStorage.getItem("id_usuario")),
+      status: "sucesso"
+    })
+  });
+  </script>
 </body>
 </html>
