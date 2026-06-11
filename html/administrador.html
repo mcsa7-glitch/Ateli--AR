@@ -235,17 +235,6 @@ textarea{
     min-height:180px;
   }
 
-  .preview-img{
-    display:block;
-    width:100%;
-    max-width:100%;
-    max-height:180px;
-    margin-top:8px;
-    border:1px solid #ddd;
-    border-radius:10px;
-    object-fit:cover;
-  }
-
 }
 </style>
 
@@ -267,14 +256,9 @@ textarea{
 
   <input type="number" id="preco" placeholder="Preço" step="0.01" min="0">
 
-  <input type="file" id="imagem" accept="image/*" onchange="previewImage(this, 'preview-imagem')">
-  <img id="preview-imagem" class="preview-img" alt="Pré-visualização imagem 1" hidden>
-
-  <input type="file" id="imagem2" accept="image/*" onchange="previewImage(this, 'preview-imagem2')">
-  <img id="preview-imagem2" class="preview-img" alt="Pré-visualização imagem 2" hidden>
-
-  <input type="file" id="imagem3" accept="image/*" onchange="previewImage(this, 'preview-imagem3')">
-  <img id="preview-imagem3" class="preview-img" alt="Pré-visualização imagem 3" hidden>
+  <input type="file" id="imagem" accept="image/*">
+<input type="file" id="imagem2" accept="image/*">
+<input type="file" id="imagem3" accept="image/*">
  
 
   <input type="text" id="categoria" placeholder="Categoria">
@@ -374,9 +358,6 @@ textarea{
     document.getElementById("imagem2").value = "";
     document.getElementById("imagem3").value = "";
     document.getElementById("categoria").value = "";
-    document.getElementById("preview-imagem").hidden = true;
-    document.getElementById("preview-imagem2").hidden = true;
-    document.getElementById("preview-imagem3").hidden = true;
 
     alert(msg);
 
@@ -392,24 +373,8 @@ textarea{
 
 }
 
-  function previewImage(input, previewId){
-    const preview = document.getElementById(previewId);
-
-    if (!preview) return;
-
-    if (input.files && input.files[0]) {
-      preview.src = URL.createObjectURL(input.files[0]);
-      preview.hidden = false;
-      preview.onload = () => {
-        URL.revokeObjectURL(preview.src);
-      };
-    } else {
-      preview.src = "";
-      preview.hidden = true;
-    }
-  }
-
   async function carregarProdutos(){
+
     const res = await fetch("https://ateli-ar.onrender.com/admin/produtos");
     const produtos = await res.json();
 
@@ -417,7 +382,8 @@ textarea{
     div.innerHTML = "";
 
     produtos.forEach(p => {
-      div.innerHTML += `
+
+  div.innerHTML += `
   <div class="item">
 
     <input
@@ -445,15 +411,6 @@ textarea{
     >
 
     <input
-      type="file"
-      id="imagem-file-${p.id}"
-      accept="image/*"
-      onchange="previewImage(this, 'preview-imagem-file-${p.id}')"
-      disabled
-    >
-    <img id="preview-imagem-file-${p.id}" class="preview-img" alt="Pré-visualização imagem 1" hidden>
-
-    <input
       id="imagem2-${p.id}"
       placeholder="URL da imagem 2"
       value="${p.imagem2 || ''}"
@@ -461,29 +418,11 @@ textarea{
     >
 
     <input
-      type="file"
-      id="imagem2-file-${p.id}"
-      accept="image/*"
-      onchange="previewImage(this, 'preview-imagem2-file-${p.id}')"
-      disabled
-    >
-    <img id="preview-imagem2-file-${p.id}" class="preview-img" alt="Pré-visualização imagem 2" hidden>
-
-    <input
       id="imagem3-${p.id}"
       placeholder="URL da imagem 3"
       value="${p.imagem3 || ''}"
       disabled
     >
-
-    <input
-      type="file"
-      id="imagem3-file-${p.id}"
-      accept="image/*"
-      onchange="previewImage(this, 'preview-imagem3-file-${p.id}')"
-      disabled
-    >
-    <img id="preview-imagem3-file-${p.id}" class="preview-img" alt="Pré-visualização imagem 3" hidden>
 
     <input
       id="categoria-${p.id}"
@@ -547,20 +486,11 @@ document
   const imagem =
     document.getElementById(`imagem-${id}`);
 
-  const imagemFile =
-    document.getElementById(`imagem-file-${id}`);
-
   const imagem2 =
     document.getElementById(`imagem2-${id}`);
 
-  const imagem2File =
-    document.getElementById(`imagem2-file-${id}`);
-
   const imagem3 =
     document.getElementById(`imagem3-${id}`);
-
-  const imagem3File =
-    document.getElementById(`imagem3-file-${id}`);
 
   const categoria =
     document.getElementById(`categoria-${id}`);
@@ -573,9 +503,9 @@ document
     nome.disabled = false;
     descricao.disabled = false;
     preco.disabled = false;
-    imagemFile.disabled = false;
-    imagem2File.disabled = false;
-    imagem3File.disabled = false;
+    imagem.disabled = false;
+    imagem2.disabled = false;
+    imagem3.disabled = false;
     categoria.disabled = false;
 
     btn.textContent =
@@ -584,29 +514,22 @@ document
     return;
   }
 
-  const formData = new FormData();
-  formData.append("nome", nome.value);
-  formData.append("descricao", descricao.value);
-  formData.append("preco", preco.value);
-  formData.append("categoria", categoria.value);
-
-  if (imagemFile.files[0]) {
-    formData.append("imagem", imagemFile.files[0]);
-  }
-
-  if (imagem2File.files[0]) {
-    formData.append("imagem2", imagem2File.files[0]);
-  }
-
-  if (imagem3File.files[0]) {
-    formData.append("imagem3", imagem3File.files[0]);
-  }
-
   const res = await fetch(
     `https://ateli-ar.onrender.com/admin/produtos/${id}`,
     {
-      method: "PUT",
-      body: formData
+      method:"PUT",
+      headers:{
+        "Content-Type":"application/json"
+      },
+      body: JSON.stringify({
+        nome: nome.value,
+        descricao: descricao.value,
+        preco: preco.value,
+        imagem: imagem.value,
+        imagem2: imagem2.value,
+        imagem3: imagem3.value,
+        categoria: categoria.value
+      })
     }
   );
 
@@ -617,22 +540,10 @@ document
   nome.disabled = true;
   descricao.disabled = true;
   preco.disabled = true;
-  imagemFile.disabled = true;
-  imagem2File.disabled = true;
-  imagem3File.disabled = true;
+  imagem.disabled = true;
+  imagem2.disabled = true;
+  imagem3.disabled = true;
   categoria.disabled = true;
-
-  imagemFile.value = "";
-  imagem2File.value = "";
-  imagem3File.value = "";
-
-  const preview1 = document.getElementById(`preview-imagem-file-${id}`);
-  const preview2 = document.getElementById(`preview-imagem2-file-${id}`);
-  const preview3 = document.getElementById(`preview-imagem3-file-${id}`);
-
-  if(preview1) preview1.hidden = true;
-  if(preview2) preview2.hidden = true;
-  if(preview3) preview3.hidden = true;
 
   btn.textContent = "Editar";
 }
