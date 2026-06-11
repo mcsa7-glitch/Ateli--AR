@@ -235,6 +235,17 @@ textarea{
     min-height:180px;
   }
 
+  .preview-img{
+    display:block;
+    width:100%;
+    max-width:100%;
+    max-height:180px;
+    margin-top:8px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    object-fit:cover;
+  }
+
 }
 </style>
 
@@ -256,9 +267,14 @@ textarea{
 
   <input type="number" id="preco" placeholder="Preço" step="0.01" min="0">
 
-  <input type="file" id="imagem" accept="image/*">
-<input type="file" id="imagem2" accept="image/*">
-<input type="file" id="imagem3" accept="image/*">
+  <input type="file" id="imagem" accept="image/*" onchange="previewImage(this, 'preview-imagem')">
+  <img id="preview-imagem" class="preview-img" alt="Pré-visualização imagem 1" hidden>
+
+  <input type="file" id="imagem2" accept="image/*" onchange="previewImage(this, 'preview-imagem2')">
+  <img id="preview-imagem2" class="preview-img" alt="Pré-visualização imagem 2" hidden>
+
+  <input type="file" id="imagem3" accept="image/*" onchange="previewImage(this, 'preview-imagem3')">
+  <img id="preview-imagem3" class="preview-img" alt="Pré-visualização imagem 3" hidden>
  
 
   <input type="text" id="categoria" placeholder="Categoria">
@@ -358,6 +374,9 @@ textarea{
     document.getElementById("imagem2").value = "";
     document.getElementById("imagem3").value = "";
     document.getElementById("categoria").value = "";
+    document.getElementById("preview-imagem").hidden = true;
+    document.getElementById("preview-imagem2").hidden = true;
+    document.getElementById("preview-imagem3").hidden = true;
 
     alert(msg);
 
@@ -373,8 +392,24 @@ textarea{
 
 }
 
-  async function carregarProdutos(){
+  function previewImage(input, previewId){
+    const preview = document.getElementById(previewId);
 
+    if (!preview) return;
+
+    if (input.files && input.files[0]) {
+      preview.src = URL.createObjectURL(input.files[0]);
+      preview.hidden = false;
+      preview.onload = () => {
+        URL.revokeObjectURL(preview.src);
+      };
+    } else {
+      preview.src = "";
+      preview.hidden = true;
+    }
+  }
+
+  async function carregarProdutos(){
     const res = await fetch("https://ateli-ar.onrender.com/admin/produtos");
     const produtos = await res.json();
 
@@ -382,8 +417,7 @@ textarea{
     div.innerHTML = "";
 
     produtos.forEach(p => {
-
-  div.innerHTML += `
+      div.innerHTML += `
   <div class="item">
 
     <input
@@ -414,8 +448,10 @@ textarea{
       type="file"
       id="imagem-file-${p.id}"
       accept="image/*"
+      onchange="previewImage(this, 'preview-imagem-file-${p.id}')"
       disabled
     >
+    <img id="preview-imagem-file-${p.id}" class="preview-img" alt="Pré-visualização imagem 1" hidden>
 
     <input
       id="imagem2-${p.id}"
@@ -428,8 +464,10 @@ textarea{
       type="file"
       id="imagem2-file-${p.id}"
       accept="image/*"
+      onchange="previewImage(this, 'preview-imagem2-file-${p.id}')"
       disabled
     >
+    <img id="preview-imagem2-file-${p.id}" class="preview-img" alt="Pré-visualização imagem 2" hidden>
 
     <input
       id="imagem3-${p.id}"
@@ -442,8 +480,10 @@ textarea{
       type="file"
       id="imagem3-file-${p.id}"
       accept="image/*"
+      onchange="previewImage(this, 'preview-imagem3-file-${p.id}')"
       disabled
     >
+    <img id="preview-imagem3-file-${p.id}" class="preview-img" alt="Pré-visualização imagem 3" hidden>
 
     <input
       id="categoria-${p.id}"
@@ -585,6 +625,14 @@ document
   imagemFile.value = "";
   imagem2File.value = "";
   imagem3File.value = "";
+
+  const preview1 = document.getElementById(`preview-imagem-file-${id}`);
+  const preview2 = document.getElementById(`preview-imagem2-file-${id}`);
+  const preview3 = document.getElementById(`preview-imagem3-file-${id}`);
+
+  if(preview1) preview1.hidden = true;
+  if(preview2) preview2.hidden = true;
+  if(preview3) preview3.hidden = true;
 
   btn.textContent = "Editar";
 }
