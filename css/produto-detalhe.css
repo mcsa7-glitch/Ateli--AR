@@ -183,7 +183,9 @@
         grid-template-columns:repeat(auto-fit,minmax(120px,2fr));
         gap:20px;
     }
-    
+      .grid-produtos {
+     grid-template-columns: repeat(auto-fit, minmax(120px, 2fr));
+    }
 }
 #relacionados .produto{
     height:100%;
