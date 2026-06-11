@@ -66,16 +66,17 @@ class PedidoModel {
 
   static async atualizarPagamento(
     id_pedido,
-    pagamento_id
+    pagamento_id,
+    link
   ) {
 
     await db.query(
       `
       UPDATE pedidos
-      SET pagamento_id=$1
+      SET pagamento_id=$1, link = $3
       WHERE id_pedido=$2
       `,
-      [pagamento_id, id_pedido]
+      [pagamento_id, id_pedido,link]
     );
   }
 

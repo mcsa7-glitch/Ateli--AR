@@ -95,7 +95,8 @@ class PedidoController {
 
       await PedidoModel.atualizarPagamento(
         pedido.id_pedido,
-        result.id
+        result.id,
+        result.init_point
       );
 
       res.json({
