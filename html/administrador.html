@@ -403,26 +403,44 @@ textarea{
       disabled
     >
 
-    <input
-      id="imagem-${p.id}"
-      placeholder="URL da imagem"
-      value="${p.imagem || ''}"
-      disabled
-    >
+    <div style="margin-top: 10px; border: 1px solid #ddd; padding: 10px; border-radius: 8px; background: #fafafa;">
+      <label style="font-size: 12px; color: #666; display: block; margin-bottom: 8px;"><strong>Imagem 1</strong></label>
+      ${p.imagem ? `<div style="margin-bottom: 10px;"><img src="${p.imagem}" style="max-width: 100%; height: 100px; object-fit: cover; border-radius: 5px;"></div>` : '<p style="color: #999; font-size: 12px;">Nenhuma imagem atual</p>'}
+      <input
+        type="file"
+        id="imagem-${p.id}"
+        accept="image/*"
+        disabled
+        style="margin-top: 5px;"
+      >
+      <p style="font-size: 11px; color: #999; margin-top: 5px;">Selecione uma nova imagem para substituir</p>
+    </div>
 
-    <input
-      id="imagem2-${p.id}"
-      placeholder="URL da imagem 2"
-      value="${p.imagem2 || ''}"
-      disabled
-    >
+    <div style="margin-top: 10px; border: 1px solid #ddd; padding: 10px; border-radius: 8px; background: #fafafa;">
+      <label style="font-size: 12px; color: #666; display: block; margin-bottom: 8px;"><strong>Imagem 2</strong></label>
+      ${p.imagem2 ? `<div style="margin-bottom: 10px;"><img src="${p.imagem2}" style="max-width: 100%; height: 100px; object-fit: cover; border-radius: 5px;"></div>` : '<p style="color: #999; font-size: 12px;">Nenhuma imagem atual</p>'}
+      <input
+        type="file"
+        id="imagem2-${p.id}"
+        accept="image/*"
+        disabled
+        style="margin-top: 5px;"
+      >
+      <p style="font-size: 11px; color: #999; margin-top: 5px;">Selecione uma nova imagem para substituir</p>
+    </div>
 
-    <input
-      id="imagem3-${p.id}"
-      placeholder="URL da imagem 3"
-      value="${p.imagem3 || ''}"
-      disabled
-    >
+    <div style="margin-top: 10px; border: 1px solid #ddd; padding: 10px; border-radius: 8px; background: #fafafa;">
+      <label style="font-size: 12px; color: #666; display: block; margin-bottom: 8px;"><strong>Imagem 3</strong></label>
+      ${p.imagem3 ? `<div style="margin-bottom: 10px;"><img src="${p.imagem3}" style="max-width: 100%; height: 100px; object-fit: cover; border-radius: 5px;"></div>` : '<p style="color: #999; font-size: 12px;">Nenhuma imagem atual</p>'}
+      <input
+        type="file"
+        id="imagem3-${p.id}"
+        accept="image/*"
+        disabled
+        style="margin-top: 5px;"
+      >
+      <p style="font-size: 11px; color: #999; margin-top: 5px;">Selecione uma nova imagem para substituir</p>
+    </div>
 
     <input
       id="categoria-${p.id}"
@@ -514,28 +532,38 @@ document
     return;
   }
 
+  // Preparar FormData para envio de arquivos
+  const formData = new FormData();
+
+  formData.append("nome", nome.value);
+  formData.append("descricao", descricao.value);
+  formData.append("preco", preco.value);
+  formData.append("categoria", categoria.value);
+
+  // Adicionar imagens se forem selecionadas
+  if(imagem.files.length > 0){
+    formData.append("imagem", imagem.files[0]);
+  }
+
+  if(imagem2.files.length > 0){
+    formData.append("imagem2", imagem2.files[0]);
+  }
+
+  if(imagem3.files.length > 0){
+    formData.append("imagem3", imagem3.files[0]);
+  }
+
   const res = await fetch(
     `https://ateli-ar.onrender.com/admin/produtos/${id}`,
     {
       method:"PUT",
-      headers:{
-        "Content-Type":"application/json"
-      },
-      body: JSON.stringify({
-        nome: nome.value,
-        descricao: descricao.value,
-        preco: preco.value,
-        imagem: imagem.value,
-        imagem2: imagem2.value,
-        imagem3: imagem3.value,
-        categoria: categoria.value
-      })
+      body: formData
     }
   );
 
   const data = await res.json();
 
-  alert(data.mensagem);
+  alert(data.mensagem || data.erro);
 
   nome.disabled = true;
   descricao.disabled = true;
@@ -546,6 +574,13 @@ document
   categoria.disabled = true;
 
   btn.textContent = "Editar";
+
+  // Limpar inputs de file
+  imagem.value = "";
+  imagem2.value = "";
+  imagem3.value = "";
+
+  carregarProdutos();
 }
 
   // ================= PEDIDOS =================
