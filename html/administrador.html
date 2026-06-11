@@ -403,7 +403,25 @@ textarea{
       disabled
     >
 
-   
+   <a
+  href="${p.imagem}"
+  target="_blank"
+  style="
+    display:inline-block;
+    margin-right:10px;
+    color:#5e1113;
+    font-weight:bold;
+  "
+>
+  📷 Ver imagem atual
+</a>
+
+<input
+  type="file"
+  id="imagem-${p.id}"
+  accept="image/*"
+  disabled
+>
      
       <input
         type="file"
