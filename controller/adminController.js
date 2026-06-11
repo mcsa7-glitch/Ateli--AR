@@ -178,9 +178,6 @@ static async adicionarProduto(req, res) {
       nome,
       descricao,
       preco,
-      imagem,
-      imagem2,
-      imagem3,
       categoria
     } = req.body;
 
@@ -191,6 +188,74 @@ static async adicionarProduto(req, res) {
       return res.status(400).json({
         erro: "Preço inválido. Use um número decimal válido (ex: 30.50)"
       });
+    }
+
+    // Buscar produto atual para obter imagens antigas
+    const produtoAtual = await Admin.buscarProdutoPorId(id);
+
+    if(!produtoAtual){
+      return res.status(404).json({
+        erro: "Produto não encontrado"
+      });
+    }
+
+    // Processar imagens - usar nova se enviada, senão manter a antiga
+    let imagem = produtoAtual.imagem;
+    let imagem2 = produtoAtual.imagem2;
+    let imagem3 = produtoAtual.imagem3;
+
+    // Imagem 1
+    if(req.files?.imagem && req.files.imagem[0]){
+      const novaImagem = "/uploads/" + req.files.imagem[0].filename;
+      
+      // Deletar imagem antiga se existir
+      if(produtoAtual.imagem){
+        const nomeArquivo = produtoAtual.imagem.replace(/^\/uploads\//, "");
+        const caminhoArquivo = path.join(__dirname, "..", "uploads", nomeArquivo);
+        
+        if(fs.existsSync(caminhoArquivo)){
+          fs.unlinkSync(caminhoArquivo);
+          console.log(`Imagem 1 antiga deletada: ${caminhoArquivo}`);
+        }
+      }
+      
+      imagem = novaImagem;
+    }
+
+    // Imagem 2
+    if(req.files?.imagem2 && req.files.imagem2[0]){
+      const novaImagem2 = "/uploads/" + req.files.imagem2[0].filename;
+      
+      // Deletar imagem antiga se existir
+      if(produtoAtual.imagem2){
+        const nomeArquivo = produtoAtual.imagem2.replace(/^\/uploads\//, "");
+        const caminhoArquivo = path.join(__dirname, "..", "uploads", nomeArquivo);
+        
+        if(fs.existsSync(caminhoArquivo)){
+          fs.unlinkSync(caminhoArquivo);
+          console.log(`Imagem 2 antiga deletada: ${caminhoArquivo}`);
+        }
+      }
+      
+      imagem2 = novaImagem2;
+    }
+
+    // Imagem 3
+    if(req.files?.imagem3 && req.files.imagem3[0]){
+      const novaImagem3 = "/uploads/" + req.files.imagem3[0].filename;
+      
+      // Deletar imagem antiga se existir
+      if(produtoAtual.imagem3){
+        const nomeArquivo = produtoAtual.imagem3.replace(/^\/uploads\//, "");
+        const caminhoArquivo = path.join(__dirname, "..", "uploads", nomeArquivo);
+        
+        if(fs.existsSync(caminhoArquivo)){
+          fs.unlinkSync(caminhoArquivo);
+          console.log(`Imagem 3 antiga deletada: ${caminhoArquivo}`);
+        }
+      }
+      
+      imagem3 = novaImagem3;
     }
 
     const result =
