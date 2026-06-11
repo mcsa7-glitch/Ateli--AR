@@ -411,6 +411,13 @@ textarea{
     >
 
     <input
+      type="file"
+      id="imagem-file-${p.id}"
+      accept="image/*"
+      disabled
+    >
+
+    <input
       id="imagem2-${p.id}"
       placeholder="URL da imagem 2"
       value="${p.imagem2 || ''}"
@@ -418,9 +425,23 @@ textarea{
     >
 
     <input
+      type="file"
+      id="imagem2-file-${p.id}"
+      accept="image/*"
+      disabled
+    >
+
+    <input
       id="imagem3-${p.id}"
       placeholder="URL da imagem 3"
       value="${p.imagem3 || ''}"
+      disabled
+    >
+
+    <input
+      type="file"
+      id="imagem3-file-${p.id}"
+      accept="image/*"
       disabled
     >
 
@@ -486,11 +507,20 @@ document
   const imagem =
     document.getElementById(`imagem-${id}`);
 
+  const imagemFile =
+    document.getElementById(`imagem-file-${id}`);
+
   const imagem2 =
     document.getElementById(`imagem2-${id}`);
 
+  const imagem2File =
+    document.getElementById(`imagem2-file-${id}`);
+
   const imagem3 =
     document.getElementById(`imagem3-${id}`);
+
+  const imagem3File =
+    document.getElementById(`imagem3-file-${id}`);
 
   const categoria =
     document.getElementById(`categoria-${id}`);
@@ -503,9 +533,9 @@ document
     nome.disabled = false;
     descricao.disabled = false;
     preco.disabled = false;
-    imagem.disabled = false;
-    imagem2.disabled = false;
-    imagem3.disabled = false;
+    imagemFile.disabled = false;
+    imagem2File.disabled = false;
+    imagem3File.disabled = false;
     categoria.disabled = false;
 
     btn.textContent =
@@ -514,22 +544,29 @@ document
     return;
   }
 
+  const formData = new FormData();
+  formData.append("nome", nome.value);
+  formData.append("descricao", descricao.value);
+  formData.append("preco", preco.value);
+  formData.append("categoria", categoria.value);
+
+  if (imagemFile.files[0]) {
+    formData.append("imagem", imagemFile.files[0]);
+  }
+
+  if (imagem2File.files[0]) {
+    formData.append("imagem2", imagem2File.files[0]);
+  }
+
+  if (imagem3File.files[0]) {
+    formData.append("imagem3", imagem3File.files[0]);
+  }
+
   const res = await fetch(
     `https://ateli-ar.onrender.com/admin/produtos/${id}`,
     {
-      method:"PUT",
-      headers:{
-        "Content-Type":"application/json"
-      },
-      body: JSON.stringify({
-        nome: nome.value,
-        descricao: descricao.value,
-        preco: preco.value,
-        imagem: imagem.value,
-        imagem2: imagem2.value,
-        imagem3: imagem3.value,
-        categoria: categoria.value
-      })
+      method: "PUT",
+      body: formData
     }
   );
 
@@ -540,10 +577,14 @@ document
   nome.disabled = true;
   descricao.disabled = true;
   preco.disabled = true;
-  imagem.disabled = true;
-  imagem2.disabled = true;
-  imagem3.disabled = true;
+  imagemFile.disabled = true;
+  imagem2File.disabled = true;
+  imagem3File.disabled = true;
   categoria.disabled = true;
+
+  imagemFile.value = "";
+  imagem2File.value = "";
+  imagem3File.value = "";
 
   btn.textContent = "Editar";
 }
