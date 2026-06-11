@@ -403,62 +403,26 @@ textarea{
       disabled
     >
 
-    <!-- IMAGEM 1 -->
-    <div style="margin-top: 10px; border: 1px solid #ddd; padding: 10px; border-radius: 8px; background: #fafafa;">
-      <label style="font-size: 12px; color: #666; display: block; margin-bottom: 8px;"><strong>Imagem 1</strong></label>
-      
-      <!-- Visualização atual -->
-      <div id="view-imagem-${p.id}" style="display: ${false ? 'none' : 'block'};">
-        ${p.imagem ? `<img src="${p.imagem}" style="max-width: 100%; height: 120px; object-fit: cover; border-radius: 5px; margin-bottom: 10px;">` : '<p style="color: #999; font-size: 12px; padding: 20px; text-align: center;">Nenhuma imagem</p>'}
-        ${p.imagem ? `<button type="button" onclick="mostrarUpload(${p.id}, 'imagem')" style="width: 100%; background: #ddd; color: #333; padding: 8px; border: none; border-radius: 5px; cursor: pointer; font-size: 12px;">Mudar imagem</button>` : `<button type="button" onclick="mostrarUpload(${p.id}, 'imagem')" style="width: 100%; background: #5e1113; color: white; padding: 8px; border: none; border-radius: 5px; cursor: pointer; font-size: 12px;">Adicionar imagem</button>`}
-      </div>
+    <input
+      id="imagem-${p.id}"
+      placeholder="URL da imagem"
+      value="${p.imagem || ''}"
+      disabled
+    >
 
-      <!-- Upload -->
-      <div id="upload-imagem-${p.id}" style="display: none;">
-        <input type="file" id="imagem-${p.id}" accept="image/*" disabled style="margin-bottom: 8px;">
-        <div style="display: flex; gap: 10px;">
-          <button type="button" onclick="cancelarUpload(${p.id}, 'imagem')" style="flex: 1; background: #ddd; color: #333; padding: 8px; border: none; border-radius: 5px; cursor: pointer; font-size: 12px;">Cancelar</button>
-        </div>
-      </div>
-    </div>
+    <input
+      id="imagem2-${p.id}"
+      placeholder="URL da imagem 2"
+      value="${p.imagem2 || ''}"
+      disabled
+    >
 
-    <!-- IMAGEM 2 -->
-    <div style="margin-top: 10px; border: 1px solid #ddd; padding: 10px; border-radius: 8px; background: #fafafa;">
-      <label style="font-size: 12px; color: #666; display: block; margin-bottom: 8px;"><strong>Imagem 2</strong></label>
-      
-      <!-- Visualização atual -->
-      <div id="view-imagem2-${p.id}" style="display: ${false ? 'none' : 'block'};">
-        ${p.imagem2 ? `<img src="${p.imagem2}" style="max-width: 100%; height: 120px; object-fit: cover; border-radius: 5px; margin-bottom: 10px;">` : '<p style="color: #999; font-size: 12px; padding: 20px; text-align: center;">Nenhuma imagem</p>'}
-        ${p.imagem2 ? `<button type="button" onclick="mostrarUpload(${p.id}, 'imagem2')" style="width: 100%; background: #ddd; color: #333; padding: 8px; border: none; border-radius: 5px; cursor: pointer; font-size: 12px;">Mudar imagem</button>` : `<button type="button" onclick="mostrarUpload(${p.id}, 'imagem2')" style="width: 100%; background: #5e1113; color: white; padding: 8px; border: none; border-radius: 5px; cursor: pointer; font-size: 12px;">Adicionar imagem</button>`}
-      </div>
-
-      <!-- Upload -->
-      <div id="upload-imagem2-${p.id}" style="display: none;">
-        <input type="file" id="imagem2-${p.id}" accept="image/*" disabled style="margin-bottom: 8px;">
-        <div style="display: flex; gap: 10px;">
-          <button type="button" onclick="cancelarUpload(${p.id}, 'imagem2')" style="flex: 1; background: #ddd; color: #333; padding: 8px; border: none; border-radius: 5px; cursor: pointer; font-size: 12px;">Cancelar</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- IMAGEM 3 -->
-    <div style="margin-top: 10px; border: 1px solid #ddd; padding: 10px; border-radius: 8px; background: #fafafa;">
-      <label style="font-size: 12px; color: #666; display: block; margin-bottom: 8px;"><strong>Imagem 3</strong></label>
-      
-      <!-- Visualização atual -->
-      <div id="view-imagem3-${p.id}" style="display: ${false ? 'none' : 'block'};">
-        ${p.imagem3 ? `<img src="${p.imagem3}" style="max-width: 100%; height: 120px; object-fit: cover; border-radius: 5px; margin-bottom: 10px;">` : '<p style="color: #999; font-size: 12px; padding: 20px; text-align: center;">Nenhuma imagem</p>'}
-        ${p.imagem3 ? `<button type="button" onclick="mostrarUpload(${p.id}, 'imagem3')" style="width: 100%; background: #ddd; color: #333; padding: 8px; border: none; border-radius: 5px; cursor: pointer; font-size: 12px;">Mudar imagem</button>` : `<button type="button" onclick="mostrarUpload(${p.id}, 'imagem3')" style="width: 100%; background: #5e1113; color: white; padding: 8px; border: none; border-radius: 5px; cursor: pointer; font-size: 12px;">Adicionar imagem</button>`}
-      </div>
-
-      <!-- Upload -->
-      <div id="upload-imagem3-${p.id}" style="display: none;">
-        <input type="file" id="imagem3-${p.id}" accept="image/*" disabled style="margin-bottom: 8px;">
-        <div style="display: flex; gap: 10px;">
-          <button type="button" onclick="cancelarUpload(${p.id}, 'imagem3')" style="flex: 1; background: #ddd; color: #333; padding: 8px; border: none; border-radius: 5px; cursor: pointer; font-size: 12px;">Cancelar</button>
-        </div>
-      </div>
-    </div>
+    <input
+      id="imagem3-${p.id}"
+      placeholder="URL da imagem 3"
+      value="${p.imagem3 || ''}"
+      disabled
+    >
 
     <input
       id="categoria-${p.id}"
@@ -539,6 +503,9 @@ document
     nome.disabled = false;
     descricao.disabled = false;
     preco.disabled = false;
+    imagem.disabled = false;
+    imagem2.disabled = false;
+    imagem3.disabled = false;
     categoria.disabled = false;
 
     btn.textContent =
@@ -547,57 +514,38 @@ document
     return;
   }
 
-  // Preparar FormData para envio de arquivos
-  const formData = new FormData();
-
-  formData.append("nome", nome.value);
-  formData.append("descricao", descricao.value);
-  formData.append("preco", preco.value);
-  formData.append("categoria", categoria.value);
-
-  // Adicionar imagens se forem selecionadas
-  if(imagem.files.length > 0){
-    formData.append("imagem", imagem.files[0]);
-  }
-
-  if(imagem2.files.length > 0){
-    formData.append("imagem2", imagem2.files[0]);
-  }
-
-  if(imagem3.files.length > 0){
-    formData.append("imagem3", imagem3.files[0]);
-  }
-
   const res = await fetch(
     `https://ateli-ar.onrender.com/admin/produtos/${id}`,
     {
       method:"PUT",
-      body: formData
+      headers:{
+        "Content-Type":"application/json"
+      },
+      body: JSON.stringify({
+        nome: nome.value,
+        descricao: descricao.value,
+        preco: preco.value,
+        imagem: imagem.value,
+        imagem2: imagem2.value,
+        imagem3: imagem3.value,
+        categoria: categoria.value
+      })
     }
   );
 
   const data = await res.json();
 
-  alert(data.mensagem || data.erro);
+  alert(data.mensagem);
 
   nome.disabled = true;
   descricao.disabled = true;
   preco.disabled = true;
+  imagem.disabled = true;
+  imagem2.disabled = true;
+  imagem3.disabled = true;
   categoria.disabled = true;
 
   btn.textContent = "Editar";
-
-  // Limpar inputs de file
-  imagem.value = "";
-  imagem2.value = "";
-  imagem3.value = "";
-
-  // Esconder uploads
-  cancelarUpload(id, "imagem");
-  cancelarUpload(id, "imagem2");
-  cancelarUpload(id, "imagem3");
-
-  carregarProdutos();
 }
 
   // ================= PEDIDOS =================
@@ -690,22 +638,6 @@ document
 }
 
   // ================= INICIAL =================
-  
-  // Mostrar input de upload
-  function mostrarUpload(id, campo){
-    document.getElementById(`view-${campo}-${id}`).style.display = "none";
-    document.getElementById(`upload-${campo}-${id}`).style.display = "block";
-    document.getElementById(`${campo}-${id}`).disabled = false;
-  }
-
-  // Cancelar upload
-  function cancelarUpload(id, campo){
-    document.getElementById(`view-${campo}-${id}`).style.display = "block";
-    document.getElementById(`upload-${campo}-${id}`).style.display = "none";
-    document.getElementById(`${campo}-${id}`).disabled = true;
-    document.getElementById(`${campo}-${id}`).value = "";
-  }
-
   carregarProdutos();
   carregarPedidos();
 
