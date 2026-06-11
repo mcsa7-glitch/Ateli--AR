@@ -406,12 +406,18 @@ textarea{
    
      
       <input
-        type="file"
-        id="imagem-${p.id}"
-        accept="image/*"
-        disabled
-        style="margin-top: 5px;"
-      >
+  type="file"
+  id="imagem-${p.id}"
+  accept="image/*"
+  disabled
+>
+
+<a
+  href="${p.imagem}"
+  target="_blank"
+>
+  ${p.imagem.split('/').pop()}
+</a>
      
 
       <input
