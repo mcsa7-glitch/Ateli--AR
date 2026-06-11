@@ -403,25 +403,7 @@ textarea{
       disabled
     >
 
-   <a
-  href="${p.imagem}"
-  target="_blank"
-  style="
-    display:inline-block;
-    margin-right:10px;
-    color:#5e1113;
-    font-weight:bold;
-  "
->
-  📷 Ver imagem atual
-</a>
-
-<input
-  type="file"
-  id="imagem-${p.id}"
-  accept="image/*"
-  disabled
->
+   
      
       <input
         type="file"
@@ -432,10 +414,6 @@ textarea{
       >
      
 
-
-    <div style="margin-top: 10px; border: 1px solid #ddd; padding: 10px; border-radius: 8px; background: #fafafa;">
-      <label style="font-size: 12px; color: #666; display: block; margin-bottom: 8px;"><strong>Imagem 2</strong></label>
-      ${p.imagem2 ? `<div style="margin-bottom: 10px;"><img src="${p.imagem2}" style="max-width: 100%; height: 100px; object-fit: cover; border-radius: 5px;"></div>` : '<p style="color: #999; font-size: 12px;">Nenhuma imagem atual</p>'}
       <input
         type="file"
         id="imagem2-${p.id}"
@@ -443,12 +421,7 @@ textarea{
         disabled
         style="margin-top: 5px;"
       >
-      <p style="font-size: 11px; color: #999; margin-top: 5px;">Selecione uma nova imagem para substituir</p>
-    </div>
-
-    <div style="margin-top: 10px; border: 1px solid #ddd; padding: 10px; border-radius: 8px; background: #fafafa;">
-      <label style="font-size: 12px; color: #666; display: block; margin-bottom: 8px;"><strong>Imagem 3</strong></label>
-      ${p.imagem3 ? `<div style="margin-bottom: 10px;"><img src="${p.imagem3}" style="max-width: 100%; height: 100px; object-fit: cover; border-radius: 5px;"></div>` : '<p style="color: #999; font-size: 12px;">Nenhuma imagem atual</p>'}
+     
       <input
         type="file"
         id="imagem3-${p.id}"
@@ -456,8 +429,7 @@ textarea{
         disabled
         style="margin-top: 5px;"
       >
-      <p style="font-size: 11px; color: #999; margin-top: 5px;">Selecione uma nova imagem para substituir</p>
-    </div>
+    
 
     <input
       id="categoria-${p.id}"
