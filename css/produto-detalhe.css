@@ -180,11 +180,8 @@
 }
 @media (min-width:480px){
     #relacionados{
-        grid-template-columns:repeat(auto-fit,minmax(120px,2fr));
-        gap:20px;
-    }
-      .grid-produtos {
-     grid-template-columns: repeat(auto-fit, minmax(120px, 2fr));
+         grid-template-columns:repeat(2,1fr);
+        gap:15px;
     }
 }
 #relacionados .produto{
