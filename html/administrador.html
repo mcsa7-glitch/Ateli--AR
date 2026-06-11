@@ -403,8 +403,9 @@ textarea{
       disabled
     >
 
-    <div style="margin-top: 10px;">
-      <label style="font-size: 12px; color: #666;">Imagem 1 (atual: ${p.imagem ? '✓' : 'nenhuma'})</label>
+    <div style="margin-top: 10px; border: 1px solid #ddd; padding: 10px; border-radius: 8px; background: #fafafa;">
+      <label style="font-size: 12px; color: #666; display: block; margin-bottom: 8px;"><strong>Imagem 1</strong></label>
+      ${p.imagem ? `<div style="margin-bottom: 10px;"><img src="${p.imagem}" style="max-width: 100%; height: 100px; object-fit: cover; border-radius: 5px;"></div>` : '<p style="color: #999; font-size: 12px;">Nenhuma imagem atual</p>'}
       <input
         type="file"
         id="imagem-${p.id}"
@@ -412,10 +413,12 @@ textarea{
         disabled
         style="margin-top: 5px;"
       >
+      <p style="font-size: 11px; color: #999; margin-top: 5px;">Selecione uma nova imagem para substituir</p>
     </div>
 
-    <div style="margin-top: 10px;">
-      <label style="font-size: 12px; color: #666;">Imagem 2 (atual: ${p.imagem2 ? '✓' : 'nenhuma'})</label>
+    <div style="margin-top: 10px; border: 1px solid #ddd; padding: 10px; border-radius: 8px; background: #fafafa;">
+      <label style="font-size: 12px; color: #666; display: block; margin-bottom: 8px;"><strong>Imagem 2</strong></label>
+      ${p.imagem2 ? `<div style="margin-bottom: 10px;"><img src="${p.imagem2}" style="max-width: 100%; height: 100px; object-fit: cover; border-radius: 5px;"></div>` : '<p style="color: #999; font-size: 12px;">Nenhuma imagem atual</p>'}
       <input
         type="file"
         id="imagem2-${p.id}"
@@ -423,10 +426,12 @@ textarea{
         disabled
         style="margin-top: 5px;"
       >
+      <p style="font-size: 11px; color: #999; margin-top: 5px;">Selecione uma nova imagem para substituir</p>
     </div>
 
-    <div style="margin-top: 10px;">
-      <label style="font-size: 12px; color: #666;">Imagem 3 (atual: ${p.imagem3 ? '✓' : 'nenhuma'})</label>
+    <div style="margin-top: 10px; border: 1px solid #ddd; padding: 10px; border-radius: 8px; background: #fafafa;">
+      <label style="font-size: 12px; color: #666; display: block; margin-bottom: 8px;"><strong>Imagem 3</strong></label>
+      ${p.imagem3 ? `<div style="margin-bottom: 10px;"><img src="${p.imagem3}" style="max-width: 100%; height: 100px; object-fit: cover; border-radius: 5px;"></div>` : '<p style="color: #999; font-size: 12px;">Nenhuma imagem atual</p>'}
       <input
         type="file"
         id="imagem3-${p.id}"
@@ -434,6 +439,7 @@ textarea{
         disabled
         style="margin-top: 5px;"
       >
+      <p style="font-size: 11px; color: #999; margin-top: 5px;">Selecione uma nova imagem para substituir</p>
     </div>
 
     <input
