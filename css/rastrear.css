@@ -531,3 +531,52 @@ RESPONSIVO CELULAR PEQUENO
     font-size: 14px;
   }
 }
+
+/* =========================
+BOTÃO PAGAR AGORA
+========================= */
+.btn-pagar{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 10px;
+  margin-right: 10px;
+
+  padding: 10px 18px;
+
+  background: #5e1113;
+  color: #fff;
+
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+
+  border-radius: 10px;
+
+  transition: all 0.3s ease;
+}
+
+.btn-pagar:hover{
+  background: #7a1a1d;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(94, 17, 19, 0.25);
+}
+
+.btn-pagar:active{
+  transform: translateY(0);
+}
+
+/* RESPONSIVO */
+@media (max-width: 480px){
+
+  .btn-pagar{
+    display: flex;
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 12px;
+    padding: 12px;
+    box-sizing: border-box;
+  }
+
+}
